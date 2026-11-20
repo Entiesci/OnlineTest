@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light only">
+<title>汉字应用水平测试 · 5500 字通关</title>
+<style>
+:root{
+  color-scheme: light;
+  --bg:#f6f1e7; --panel:#fffdf8; --panel-2:#fffefb; --raise:#f3ecdf;
+  --ink:#211c16; --ink-2:#6b6255; --ink-3:#9a9082;
+  --line:#e4dbc9; --line-2:#d6cab4;
+  --red:#b3402f; --red-soft:#f7e9e5; --red-line:#ecd3cc; --red-ink:#8d3024;
+  --green:#3d6b4f; --green-soft:#e9f0ea; --green-line:#a9c4b0; --green-ink:#2c5138;
+  --gold:#b08a3e; --gold-2:#8f6f2f;
+  --hz:#17130f;
+  --hud:rgba(255,253,248,.72); --track:#efe8da; --tick:rgba(255,253,248,.85);
+  --yes-bg:#211c16; --yes-fg:#fffdf8; --yes-line:#211c16;
+  --opt-bg:#ffffff;
+  --shadow:0 18px 40px -18px rgba(60,45,25,.28), 0 2px 6px rgba(60,45,25,.06);
+  --modal-shadow:0 30px 70px -20px rgba(40,30,15,.45);
+  --glow:rgba(201,163,94,.0);
+  --r:20px;
+}
+html[data-theme="dark"]{
+  color-scheme: dark;
+  --bg:#100e0b; --panel:#191511; --panel-2:#1f1a15; --raise:#241e18;
+  --ink:#ece3d2; --ink-2:#b9ae9a; --ink-3:#877c6a;
+  --line:#2b2520; --line-2:#3a322a;
+  --red:#d1583f; --red-soft:#2a1a16; --red-line:#4a2a23; --red-ink:#e79b8a;
+  --green:#7cae8c; --green-soft:#17241b; --green-line:#3c6449; --green-ink:#a8d4b6;
+  --gold:#c9a35e; --gold-2:#d8b26b;
+  --hz:#f6eedd;
+  --hud:rgba(16,14,11,.72); --track:#241f19; --tick:rgba(16,14,11,.55);
+  --yes-bg:#c9a35e; --yes-fg:#1a1510; --yes-line:#c9a35e;
+  --opt-bg:#211b15;
+  --shadow:0 24px 60px -24px rgba(0,0,0,.85), 0 2px 8px rgba(0,0,0,.35);
+  --modal-shadow:0 40px 90px -30px #000;
+  --glow:rgba(201,163,94,.14);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  overflow:hidden; user-select:none;
+  transition:background .25s, color .25s;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(1100px 560px at 12% -12%, rgba(201,163,94,.12) 0%, rgba(201,163,94,0) 62%),
+    radial-gradient(900px 520px at 100% 112%, rgba(179,64,47,.08) 0%, rgba(179,64,47,0) 60%);
+}
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+}
+#app{position:relative; z-index:1; height:100%; display:flex; flex-direction:column}
+
+/* ---------- HUD ---------- */
+.hud{
+  flex:0 0 auto; display:flex; align-items:center; gap:18px;
+  padding:14px 26px; border-bottom:1px solid var(--line);
+  background:var(--hud); backdrop-filter:blur(10px);
+}
+.levels{display:flex; gap:6px}
+.lv{
+  font-size:13px; letter-spacing:.06em; padding:5px 12px; border-radius:999px;
+  border:1px solid var(--line-2); color:var(--ink-3); background:transparent;
+  transition:.25s; white-space:nowrap;
+}
+.lv.on{color:var(--yes-fg); background:var(--yes-bg); border-color:var(--yes-bg)}
+.lv.done{color:var(--green-ink); border-color:var(--green-line); background:var(--green-soft)}
+.hud-mid{flex:1; min-width:0; display:flex; flex-direction:column; gap:7px}
+.hud-row{display:flex; align-items:baseline; justify-content:space-between; gap:12px}
+.hud-count{font-size:13px; color:var(--ink-2); font-variant-numeric:tabular-nums}
+.hud-count b{color:var(--ink); font-size:15px}
+.track{height:7px; border-radius:99px; background:var(--track); overflow:hidden; position:relative}
+.track>i{display:block; height:100%; width:0; border-radius:99px; background:linear-gradient(90deg,#8f7a4e,var(--gold-2)); transition:width .35s ease}
+.ticks{position:absolute; inset:0; display:flex}
+.ticks span{flex:1; border-right:1px solid var(--tick)}
+.ticks span:last-child{border:0}
+.hud-right{display:flex; align-items:center; gap:16px; font-variant-numeric:tabular-nums}
+.stat{text-align:right; line-height:1.15}
+.stat .k{font-size:10.5px; color:var(--ink-3); letter-spacing:.12em}
+.stat .v{font-size:15px; font-weight:600}
+.stat .v small{font-size:11px; font-weight:400; color:var(--ink-3)}
+.icon-btn{
+  width:34px;height:34px;border-radius:10px;border:1px solid var(--line-2);
+  background:var(--panel); color:var(--ink-2); cursor:pointer; font-size:13px;
+  display:grid;place-items:center; transition:.2s;
+}
+.icon-btn:hover{background:var(--raise); color:var(--ink)}
+
+/* ---------- 舞台 ---------- */
+.stage{flex:1; display:flex; align-items:center; justify-content:center; padding:18px 26px; min-height:0}
+.card{
+  width:min(760px,100%); height:min(100%,660px); max-height:100%;
+  background:var(--panel);
+  border:1px solid var(--line-2); border-radius:var(--r);
+  box-shadow:var(--shadow); display:flex; flex-direction:column; overflow:hidden; position:relative;
+}
+.card::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(600px 300px at 50% 0%, rgba(201,163,94,.06), transparent 70%);
+}
+.card-top{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 24px 0; color:var(--ink-3); font-size:12px; letter-spacing:.14em;
+}
+.tag{border:1px solid var(--line-2); border-radius:999px; padding:3px 10px; letter-spacing:.1em}
+.tag.multi{color:var(--gold); border-color:#e3d3ab; background:#fbf6e8}
+html[data-theme="dark"] .tag.multi{border-color:#4a3c25; background:#241d12}
+.card-body{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; padding:8px 24px; min-height:0}
+.hz{
+  font-family:"Kaiti SC","KaiTi","STKaiti","Kaiti TC","Noto Serif SC","Songti SC",serif;
+  font-size:calc(clamp(96px,17vh,190px) * var(--hzscale,1)); line-height:1.05; font-weight:400; letter-spacing:.02em;
+  color:var(--hz); text-shadow:0 0 40px var(--glow);
+  transition:transform .18s ease, opacity .18s ease;
+}
+.hz.pop{animation:pop .28s ease}
+@keyframes pop{0%{transform:scale(.94);opacity:.3}100%{transform:scale(1);opacity:1}}
+.q{font-size:15px; color:var(--ink-2); letter-spacing:.06em; min-height:22px}
+.opts{display:flex; gap:14px; margin-top:16px; width:min(520px,100%)}
+.opt{
+  flex:1; min-height:66px; border-radius:14px; border:1px solid var(--line-2); background:var(--opt-bg);
+  font-size:17px; color:var(--ink); cursor:pointer; display:flex; align-items:center; justify-content:center;
+  gap:10px; padding:10px 14px; transition:.16s; font-family:inherit;
+}
+.opt:hover{border-color:var(--ink-3); background:var(--raise); transform:translateY(-1px)}
+.opt .kk{font-size:11px; color:var(--ink-3); border:1px solid var(--line); border-radius:6px; padding:1px 6px}
+.opt.right{background:var(--green-soft); border-color:var(--green-line); color:var(--green-ink)}
+.opt.wrong{background:var(--red-soft); border-color:var(--red-line); color:var(--red-ink)}
+.reveal{
+  margin-top:14px; min-height:44px; text-align:center; color:var(--ink-2); font-size:14px;
+  opacity:0; transform:translateY(4px); transition:.2s; line-height:1.7; max-width:560px;
+}
+.reveal.on{opacity:1; transform:none}
+.reveal .py{font-size:24px; color:var(--gold); letter-spacing:.05em; font-family:"Times New Roman",Georgia,serif}
+.reveal .gl{color:var(--ink-2)}
+.reveal .more{color:var(--ink-3); font-size:12.5px}
+
+/* ---------- 底部按钮 ---------- */
+.actions{
+  flex:0 0 auto; display:flex; gap:14px; padding:0 26px 22px; align-items:center; justify-content:center;
+}
+.act{
+  flex:0 1 224px; height:64px; border-radius:16px; font-size:18px; letter-spacing:.08em;
+  cursor:pointer; border:1px solid var(--line-2); background:var(--panel); color:var(--ink);
+  display:flex; align-items:center; justify-content:center; gap:10px; transition:.16s; font-family:inherit;
+  box-shadow:0 2px 0 rgba(60,45,25,.05);
+}
+.act:hover{transform:translateY(-1px); background:var(--raise)}
+.act:active{transform:translateY(0)}
+.act .kk{font-size:11px; color:var(--ink-3); border:1px solid var(--line); border-radius:6px; padding:1px 7px}
+.act.no{color:var(--red-ink); border-color:var(--red-line); background:var(--red-soft)}
+.act.no:hover{background:var(--red-soft); filter:brightness(.97)}
+.act.yes{color:var(--yes-fg); background:var(--yes-bg); border-color:var(--yes-line); font-weight:600}
+.act.yes:hover{background:var(--yes-bg); filter:brightness(1.08)}
+.act.yes .kk{color:var(--yes-fg); opacity:.55; border-color:currentColor}
+.act.prev{
+  flex:0 0 132px; height:52px; font-size:12.5px; letter-spacing:.02em;
+  color:var(--ink-3); background:transparent; border-style:dashed; box-shadow:none;
+}
+.act.prev:hover{color:var(--red-ink); border-color:var(--red-line); background:transparent}
+
+/* ---------- 上一题旁栏 ---------- */
+.peek{
+  position:fixed; right:26px; top:50%; z-index:45; width:296px; padding:22px 22px 20px;
+  background:var(--panel); border:1px solid var(--line-2); border-radius:18px;
+  box-shadow:var(--modal-shadow);
+  transform:translate(calc(100% + 60px),-50%); transition:transform .3s cubic-bezier(.2,.8,.3,1);
+}
+.peek.on{transform:translate(0,-50%)}
+.peek .ph{font-size:11px; letter-spacing:.16em; color:var(--ink-3); display:flex; justify-content:space-between; align-items:center}
+.peek .phz{
+  font-family:"Kaiti SC","KaiTi","STKaiti","Noto Serif SC",serif;
+  font-size:92px; line-height:1.1; text-align:center; margin:8px 0 2px; color:var(--hz);
+}
+.peek .pq{text-align:center; font-size:12.5px; color:var(--ink-3); letter-spacing:.06em}
+.peek .pa{margin-top:12px; text-align:center; font-size:13.5px; line-height:1.65; color:var(--ink-2); min-height:44px}
+.peek .pa .py{display:block; color:var(--gold); font-size:21px; font-family:"Times New Roman",Georgia,serif; letter-spacing:.04em}
+.peek .pa .more{display:block; color:var(--ink-3); font-size:11.5px; margin-top:2px}
+.peek .pm{margin-top:14px; padding-top:12px; border-top:1px dashed var(--line); font-size:12.5px; color:var(--ink-3); display:flex; justify-content:space-between; align-items:center}
+.peek .pm b{font-size:13.5px; font-weight:600}
+.peek .pm b.k1{color:var(--yes-fg); background:var(--yes-bg); padding:2px 8px; border-radius:6px}
+.peek .pm b.k2{color:var(--gold-2); border:1px solid #e0cfab; background:#fdfaf2; padding:2px 8px; border-radius:6px}
+.peek .pm b.k0{color:var(--red-ink); border:1px solid var(--red-line); background:var(--red-soft); padding:2px 8px; border-radius:6px}
+html[data-theme="dark"] .peek .pm b.k2{color:var(--gold); border-color:#4a3c25; background:#221b11}
+.act.prev .kk{border-color:currentColor; opacity:.7}
+.act.recog{color:var(--gold-2); border-color:#e0cfab; background:#fdfaf2}
+.act.recog:hover{background:#f8f1e0}
+.act.recog .kk{color:var(--gold-2); border-color:#e0cfab}
+html[data-theme="dark"] .act.recog{color:var(--gold); border-color:#4a3c25; background:#221b11}
+html[data-theme="dark"] .act.recog:hover{background:#2a2115}
+html[data-theme="dark"] .act.recog .kk{color:var(--gold); border-color:#4a3c25}
+
+/* ---------- 遮罩 / 弹窗 ---------- */
+.mask{
+  position:fixed; inset:0; z-index:50; background:rgba(20,14,8,.42); backdrop-filter:blur(3px);
+  display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:.2s;
+}
+html[data-theme="dark"] .mask{background:rgba(6,5,4,.72)}
+.mask.on{opacity:1; pointer-events:auto}
+.modal{
+  width:min(620px,100%); max-height:86vh; overflow:auto; background:var(--panel); border-radius:22px;
+  border:1px solid var(--line-2); box-shadow:var(--modal-shadow); padding:30px 32px 26px;
+  transform:translateY(10px) scale(.99); transition:.22s;
+}
+.mask.on .modal{transform:none}
+.m-title{font-size:22px; font-weight:600; letter-spacing:.03em; margin:0 0 4px}
+.m-sub{color:var(--ink-3); font-size:13px; margin-bottom:20px; letter-spacing:.05em}
+.big-num{display:flex; align-items:baseline; gap:8px; margin:6px 0 18px}
+.big-num b{font-size:52px; font-weight:600; letter-spacing:-.02em; font-variant-numeric:tabular-nums; color:var(--gold)}
+.big-num span{color:var(--ink-3); font-size:13px}
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:0 0 18px}
+.cell{border:1px solid var(--line); border-radius:14px; padding:12px 14px; background:var(--panel-2)}
+.cell .k{font-size:11px; color:var(--ink-3); letter-spacing:.1em; margin-bottom:4px}
+.cell .v{font-size:19px; font-weight:600; font-variant-numeric:tabular-nums}
+.cell .v small{font-size:11px; font-weight:400; color:var(--ink-3)}
+.row{display:flex; justify-content:space-between; font-size:13.5px; color:var(--ink-2); padding:7px 0; border-bottom:1px dashed var(--line)}
+.row:last-child{border:0}
+.row b{color:var(--ink); font-variant-numeric:tabular-nums}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin:10px 0 4px; max-height:150px; overflow:auto}
+.chip{
+  font-family:"Kaiti SC","KaiTi",serif; font-size:22px; line-height:1; padding:8px 10px; border-radius:9px;
+  background:var(--red-soft); color:var(--red-ink); border:1px solid var(--red-line);
+}
+.chip.gold{background:#fbf3e2; color:var(--gold-2); border-color:#e8d6ae}
+html[data-theme="dark"] .chip.gold{background:#241d12; color:var(--gold); border-color:#4a3c25}
+.m-actions{display:flex; gap:10px; margin-top:22px; justify-content:flex-end; flex-wrap:wrap}
+.btn{
+  height:46px; padding:0 22px; border-radius:12px; border:1px solid var(--line-2); background:var(--panel);
+  font-size:15px; cursor:pointer; font-family:inherit; color:var(--ink); transition:.16s; letter-spacing:.04em;
+}
+.btn:hover{background:var(--raise)}
+.btn.primary{background:var(--yes-bg); color:var(--yes-fg); border-color:var(--yes-line); font-weight:600}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{border-color:transparent; color:var(--ink-2)}
+
+/* ---------- 首页 ---------- */
+.home{flex:1; display:flex; align-items:center; justify-content:center; padding:24px; overflow:auto}
+.home-inner{width:min(880px,100%); text-align:center; padding:10px 0}
+.seal{
+  width:56px;height:56px;border-radius:12px;background:var(--red);color:#fff5ef;display:grid;place-items:center;
+  font-family:"Kaiti SC","KaiTi",serif;font-size:26px;margin:0 auto 18px;box-shadow:0 10px 24px -10px rgba(179,64,47,.75);
+}
+h1{font-size:clamp(26px,3.4vw,40px); font-weight:600; letter-spacing:.04em; margin:0 0 10px}
+.home .lead{color:var(--ink-2); font-size:14.5px; line-height:1.9; margin:0 auto 26px; max-width:620px}
+.home .lead b{color:var(--ink)}
+.home .lead code{background:var(--track); color:var(--gold-2); padding:1px 6px; border-radius:5px; font-size:13px}
+.lv-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:0 0 26px; text-align:left}
+.lvc{border:1px solid var(--line); border-radius:16px; padding:16px 18px; background:var(--panel); box-shadow:var(--shadow)}
+.lvc .n{font-size:12px; color:var(--ink-3); letter-spacing:.16em}
+.lvc .c{font-size:26px; font-weight:600; margin:6px 0 2px; font-variant-numeric:tabular-nums}
+.lvc .d{font-size:12px; color:var(--ink-3)}
+.lvc .bar{height:4px; border-radius:99px; background:var(--track); margin-top:10px; overflow:hidden}
+.lvc .bar i{display:block;height:100%;background:var(--green);width:0}
+.home-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+.keys{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:28px; color:var(--ink-3); font-size:12px}
+.keys kbd{border:1px solid var(--line-2); border-bottom-width:2px; border-radius:5px; padding:1px 6px; background:var(--panel); color:var(--ink-2); font-size:11px; margin-right:4px}
+
+/* ---------- toast ---------- */
+#toast{
+  position:fixed; left:50%; top:18px; transform:translate(-50%,-16px); z-index:80;
+  background:var(--yes-bg); color:var(--yes-fg); padding:9px 18px; border-radius:99px; font-size:13px;
+  opacity:0; pointer-events:none; transition:.22s; letter-spacing:.04em; font-weight:600;
+}
+#toast.on{opacity:1; transform:translate(-50%,0)}
+.hide{display:none !important}
+@media (max-width:720px){
+  .hud{padding:10px 14px; gap:10px; flex-wrap:wrap}
+  .hud-right .stat.opt-only{display:none}
+  .stage{padding:10px}
+  .actions{padding:0 12px 14px; gap:8px; flex-wrap:wrap}
+  .act{height:56px; font-size:14px; flex:1 1 30%}
+  .act.prev{flex:0 0 100%; height:44px; font-size:13px; order:2}
+  .lv-cards{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ================= 首页 ================= -->
+  <div class="home" id="home">
+    <div class="home-inner">
+      <div class="seal">字</div>
+      <h1>汉字应用水平测试 · 5500 字通关</h1>
+      <p class="lead">
+        依据《汉字应用水平等级及测试大纲》附录 A 字表，按 <b>甲表 4000 → 乙表 500 → 丙表 1000</b> 的顺序闯关，
+        组内随机打乱。每个字一道题，考 <b>字音</b> 或 <b>字义</b>；想好后点下方 <code>不熟</code> / <code>会认不会写</code> / <code>掌握</code>，
+        每过 100 字出一次统计。建议：<b>4 小时内过完甲组 + 乙组</b>。
+      </p>
+      <div class="lv-cards" id="lvCards"></div>
+      <div class="home-actions">
+        <button class="btn primary" id="btnStart" style="height:52px;padding:0 34px;font-size:16px">开始通关</button>
+        <button class="btn" id="btnResume" style="height:52px;padding:0 30px;font-size:16px">继续上次</button>
+        <button class="btn ghost" id="btnSettings" style="height:52px">设置</button>
+      </div>
+      <div class="keys">
+        <span><kbd>1</kbd><kbd>2</kbd> 选答案</span>
+        <span><kbd>F</kbd> 不熟</span>
+        <span><kbd>W</kbd> 会认不会写</span>
+        <span><kbd>J</kbd> 掌握</span>
+        <span><kbd>空格</kbd> 看答案</span>
+        <span><kbd>Z</kbd> 撤销</span>
+        <span><kbd>U</kbd> 上一题答错了</span>
+        <span><kbd>V</kbd> 查看上一题</span>
+        <span><kbd>Esc</kbd> 暂停</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 答题 ================= -->
+  <div id="play" class="hide" style="flex:1;display:flex;flex-direction:column;min-height:0">
+    <div class="hud">
+      <div class="levels" id="levels">
+        <span class="lv" data-g="0">甲组</span>
+        <span class="lv" data-g="1">乙组</span>
+        <span class="lv" data-g="2">丙组</span>
+      </div>
+      <div class="hud-mid">
+        <div class="hud-row">
+          <div class="hud-count"><b id="cNow">0</b> / <span id="cAll">0</span> 字</div>
+          <div class="hud-count" id="pace">—</div>
+        </div>
+        <div class="track"><i id="bar"></i><div class="ticks" id="ticks"></div></div>
+      </div>
+      <div class="hud-right">
+        <div class="stat opt-only"><div class="k">用时</div><div class="v" id="clock">00:00</div></div>
+        <div class="stat"><div class="k">掌握率</div><div class="v" id="rate">—</div></div>
+        <button class="icon-btn" id="btnTheme" title="切换主题">☾</button>
+        <button class="icon-btn" id="btnStat" title="统计">▤</button>
+        <button class="icon-btn" id="btnPause" title="暂停">❙❙</button>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="card">
+        <div class="card-top">
+          <span id="cardLv">甲组 · 第 1 关</span>
+          <span class="tag" id="tag">读音</span>
+        </div>
+        <div class="card-body">
+          <div class="hz" id="hz">一</div>
+          <div class="q" id="q">这个字读什么？</div>
+          <div class="opts hide" id="opts">
+            <button class="opt" data-i="0"><span class="kk">1</span><span class="ot"></span></button>
+            <button class="opt" data-i="1"><span class="kk">2</span><span class="ot"></span></button>
+          </div>
+          <div class="reveal" id="reveal"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="act prev" id="btnUndo">撤销 <span class="kk">Z</span></button>
+      <button class="act prev" id="btnPrev">答错了 <span class="kk">U</span></button>
+      <button class="act prev" id="btnPeek">看上一题 <span class="kk">V</span></button>
+      <button class="act no" id="btnNo">不熟 <span class="kk">F</span></button>
+      <button class="act recog" id="btnRecog">会认不会写 <span class="kk">W</span></button>
+      <button class="act yes" id="btnYes">掌握 <span class="kk">J</span></button>
+    </div>
+
+    <aside class="peek" id="peek">
+      <div class="ph"><span>上一题</span><span id="peekLv" style="opacity:.7"></span></div>
+      <div class="phz" id="peekHz">—</div>
+      <div class="pq" id="peekQ"></div>
+      <div class="pa" id="peekA"></div>
+      <div class="pm"><span>当时标记</span><b id="peekMark">—</b></div>
+      <button class="btn" id="peekClose" style="width:100%;margin-top:16px;height:40px">关闭 <span style="opacity:.6;font-size:12px">V / Esc</span></button>
+    </aside>
+  </div>
+</div>
+
+<div class="mask" id="mask"><div class="modal" id="modal"></div></div>
+<div id="toast"></div>
+
+<script>
+/* ==================================================================
+   数据：__DATA__
+   ================================================================== */
+const DATA = /*__DATA__*/{chars:"",py:[],pyAll:[],gl:[],sizes:[0,0,0]};
+const TOTAL = DATA.chars.length;
+const OFFSET = [0, DATA.sizes[0], DATA.sizes[0]+DATA.sizes[1]];
+const GNAME = ['甲组','乙组','丙组'];
+const GTARGET = [4000, 500, 1000];
+const KEY = 'hz_tongguan_v1';
+const TARGET_SEC = 4*3600;        // 甲+乙 建议 4 小时
+
+/* ---------------- 工具 ---------------- */
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2,'0');
+const fmt = s => { s=Math.max(0,Math.round(s)); const h=Math.floor(s/3600),m=Math.floor(s%3600/60); return h? h+':'+pad(m)+':'+pad(s%60) : pad(m)+':'+pad(s%60); };
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function shuffle(arr,rnd){for(let i=arr.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
+
+/* ---------------- 主题 ---------------- */
+function applyTheme(){
+  const t = (S && S.theme) || localStorage.getItem('hz_theme') || 'light';
+  document.documentElement.dataset.theme = t;
+  const b = document.getElementById('btnTheme');
+  if(b) b.textContent = t==='dark' ? '☀' : '☾';
+}
+function toggleTheme(){
+  const t = document.documentElement.dataset.theme==='dark' ? 'light' : 'dark';
+  if(S){ S.theme = t; save(); }
+  localStorage.setItem('hz_theme', t);
+  applyTheme();
+}
+
+/* ---------------- 状态 ---------------- */
+let S = null;
+let cur = null;           // 当前卡 {g, i, ch, type, opts, ans}
+let locked = false;       // 结算动画中
+let paused = false;
+let timerId = null;
+let lastTick = 0;
+let blockStart = 0;       // 本百字开始时间
+
+function newState(seed){
+  return {
+    seed: seed || Math.floor(Math.random()*1e9),
+    res: ['','',''],       // '1'=掌握 '0'=不熟
+    elapsed: 0,            // 累计秒
+    started: false,
+    mode: 'self',          // self | quiz
+    font: 1,               // 字号档
+    theme: localStorage.getItem('hz_theme') || 'light',
+    sound: false,
+    blocks: [],            // 每 100 字统计
+  };
+}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.res&&s.res.length===3) return s; }catch(e){} return null; }
+
+/* 生成/还原每组顺序 */
+let ORDER = [[],[],[]];
+function buildOrder(){
+  ORDER = [[],[],[]];
+  for(let g=0;g<3;g++){
+    const rnd = mulberry32(S.seed + g*7919);
+    const arr = Array.from({length:GTARGET[g]},(_,i)=>i);
+    shuffle(arr,rnd);
+    ORDER[g] = arr;
+  }
+}
+
+/* ---------------- 进度 ---------------- */
+function curGroup(){
+  for(let g=0;g<3;g++) if(S.res[g].length < GTARGET[g]) return g;
+  return 2;
+}
+function doneAll(){ return S.res[0].length>=4000 && S.res[1].length>=500 && S.res[2].length>=1000; }
+function totalDone(){ return S.res[0].length+S.res[1].length+S.res[2].length; }
+function rateOf(g){
+  const r=S.res[g]; if(!r.length) return null;
+  let k=0; for(const c of r) if(c==='1') k++;
+  return k/r.length;
+}
+
+/* ---------------- 卡片 ---------------- */
+function makeCard(g){
+  const i = S.res[g].length;                 // 本组第 i 个字（0 起）
+  const oi = ORDER[g][i];
+  const idx = OFFSET[g] + oi;
+  const ch = DATA.chars[idx];
+  const py = DATA.py[idx] || '';
+  const gl = DATA.gl[idx] || '';
+  // 题型：约 6 成读音，其余在有释义时考字义
+  let type = (hash(ch) % 10) < 6 ? '音' : (gl ? '义' : '音');
+  let opts=[], ans=0;
+  if(type==='音'){
+    const d = pickPy(idx, py);
+    opts = [py, d];
+  }else{
+    const d = pickGl(idx, gl);
+    opts = [gl, d];
+  }
+  const rnd = mulberry32(S.seed + g*131 + i*17);
+  if(rnd() < .5) { opts = [opts[1],opts[0]]; ans = 1; }
+  return {g, i, idx, ch, type, opts, ans, py, gl};
+}
+function hash(s){ let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; return h; }
+
+function pickPy(idx, py){
+  const all = (DATA.pyAll[idx]||'').split('|');
+  let best=[], bs=-1;
+  for(let k=0;k<400;k++){
+    const j = Math.floor(Math.random()*TOTAL);
+    if(j===idx) continue;
+    const q = DATA.py[j]; if(!q || q===py || all.includes(q)) continue;
+    let cp=0; while(cp<py.length && cp<q.length && py[cp]===q[cp]) cp++;
+    const sc = cp*2 + (py.slice(-1)===q.slice(-1)?1:0) + (py.length===q.length?1:0);
+    if(sc>bs){bs=sc;best=[q]} else if(sc===bs) best.push(q);
+  }
+  return best.length? best[Math.floor(Math.random()*best.length)] : 'yi';
+}
+function pickGl(idx, gl){
+  let best=[], bs=1e9;
+  for(let k=0;k<400;k++){
+    const j = Math.floor(Math.random()*TOTAL);
+    if(j===idx) continue;
+    const q = DATA.gl[j]; if(!q || q===gl) continue;
+    const d = Math.abs(q.length-gl.length);
+    if(d<bs){bs=d;best=[q]} else if(d===bs) best.push(q);
+  }
+  return best.length? best[Math.floor(Math.random()*best.length)] : '同音字';
+}
+
+function render(){
+  if(doneAll()){ showReport(); return; }
+  const g = curGroup();
+  cur = makeCard(g);
+  locked = false;
+  const n = S.res[g].length;
+  $('#cardLv').textContent = GNAME[g] + ' · 第 ' + (Math.floor(n/100)+1) + ' 关';
+  const poly = (DATA.pyAll[cur.idx]||'').includes('|');
+  $('#tag').textContent = cur.type==='音' ? (poly?'多音字':'读音') : '释义';
+  $('#tag').className = 'tag' + (cur.type==='音' && poly ? ' multi' : '');
+  $('#hz').textContent = cur.ch;
+  $('#hz').classList.remove('pop'); void $('#hz').offsetWidth; $('#hz').classList.add('pop');
+  $('#q').innerHTML = cur.type==='音' ? '这个字读什么？' : '这个字是什么意思？';
+  $('#reveal').className = 'reveal'; $('#reveal').innerHTML='';
+  if(S.mode!=='quiz'){
+    $('#reveal').innerHTML = '<div class="more" style="opacity:.75">空格 看答案 · 想好后再判断</div>';
+    $('#reveal').className = 'reveal on';
+  }
+  const opts = $('#opts');
+  if(S.mode==='quiz'){
+    opts.classList.remove('hide');
+    [...opts.children].forEach((b,i)=>{ b.className='opt'; b.querySelector('.ot').textContent = cur.opts[i]; });
+  }else{
+    opts.classList.add('hide');
+  }
+  updateHud();
+}
+function updateHud(){
+  const g = curGroup();
+  const n = S.res[g].length;
+  $('#cNow').textContent = n;
+  $('#cAll').textContent = GTARGET[g];
+  $('#bar').style.width = (n/GTARGET[g]*100)+'%';
+  // ticks
+  const segs = Math.ceil(GTARGET[g]/100);
+  if($('#ticks').children.length !== segs){
+    $('#ticks').innerHTML = Array.from({length:segs},()=>'<span></span>').join('');
+  }
+  // levels
+  [...$('#levels').children].forEach((el,i)=>{
+    el.className = 'lv' + (i===g?' on':'') + (S.res[i].length>=GTARGET[i]?' done':'');
+  });
+  // 掌握率
+  let k=0,t=0; for(let i=0;i<3;i++){ for(const c of S.res[i]){ t++; if(c==='1')k++; } }
+  $('#rate').innerHTML = t? Math.round(k/t*100)+'<small>%</small>' : '—';
+  // 配速
+  const done = totalDone();
+  if(done>2 && S.elapsed>2){
+    const spd = done/S.elapsed;                    // 字/秒
+    const remain = (4000+500) - (S.res[0].length+S.res[1].length);
+    if(remain>0){
+      const need = remain/spd;
+      const left = TARGET_SEC - S.elapsed;
+      $('#pace').innerHTML = '预计还需 <b>'+fmt(need)+'</b> · 建议余 '+fmt(left);
+    }else{
+      $('#pace').innerHTML = '甲+乙 已完成 · 均速 '+ (spd*60).toFixed(0) +' 字/分';
+    }
+  }else{
+    $('#pace').textContent = '建议 4 小时内过完甲+乙';
+  }
+  $('#clock').textContent = fmt(S.elapsed);
+}
+
+/* ---------------- 计时 ---------------- */
+function startTimer(){
+  if(timerId) return;
+  lastTick = Date.now();
+  timerId = setInterval(()=>{
+    if(paused || locked || peekOpen) { lastTick = Date.now(); return; }
+    const now = Date.now();
+    S.elapsed += (now-lastTick)/1000;
+    lastTick = now;
+    $('#clock').textContent = fmt(S.elapsed);
+    if(Math.floor(S.elapsed)%30===0) { save(); updateHud(); }
+  }, 1000);
+}
+
+/* ---------------- 记录 ---------------- */
+function record(kind){
+  if(locked || !cur) return;
+  closePeek();                       // 主操作时自动收起侧栏
+  locked = true;
+  undoPtr = null;
+  if(cur.review){                       // 复习模式：不改动原成绩
+    showReveal(kind);
+    setTimeout(()=>{ locked=false; reviewIdx++; renderReview(); }, kind==='known'?320:(kind==='recog'?900:1500));
+    return;
+  }
+  const g = cur.g;
+  const code = kind==='known' ? '1' : (kind==='recog' ? '2' : '0');
+  pushUndo(({known:'掌握',recog:'会认不会写',unknown:'不熟'})[kind] + '「' + cur.ch + '」');
+  S.res[g] += code;
+  // 揭示答案
+  showReveal(kind);
+  const wait = kind==='known' ? 320 : (kind==='recog' ? 900 : 1500);
+  setTimeout(()=>{
+    locked = false;
+    const n = S.res[g].length;
+    if(n % 100 === 0 && n < GTARGET[g]) { checkpoint(g, n); return; }
+    if(n >= GTARGET[g]) { levelClear(g); return; }
+    render(); save();
+  }, wait);
+}
+
+function showReveal(kind){
+  const r = $('#reveal');
+  const parts = [];
+  parts.push('<div class="py">'+cur.py+'</div>');
+  if(cur.gl) parts.push('<div class="gl">'+cur.gl+'</div>');
+  const all = (DATA.pyAll[cur.idx]||'').split('|').filter(x=>x&&x!==cur.py);
+  if(all.length) parts.push('<div class="more">多音字：'+all.slice(0,4).join('、')+'</div>');
+  r.innerHTML = parts.join('');
+  r.className = 'reveal on';
+  if(S.mode==='quiz'){
+    [...$('#opts').children].forEach((b,i)=>{
+      if(i===cur.ans) b.classList.add('right');
+      else if(kind==='unknown') b.classList.add('wrong');
+    });
+  }
+}
+
+/* ---------------- 检查点：每 100 字 ---------------- */
+function checkpoint(g, n){
+  const r = S.res[g].slice(n-100, n);
+  let k=0, rc=0; for(const c of r){ if(c==='1') k++; else if(c==='2') rc++; }
+  const unknownChars = [], recogChars = [];
+  for(let i=n-100;i<n;i++){
+    const c = S.res[g][i], ch = DATA.chars[OFFSET[g]+ORDER[g][i]];
+    if(c==='0') unknownChars.push(ch);
+    else if(c==='2') recogChars.push(ch);
+  }
+  const blockSec = S.elapsed - blockStart;
+  blockStart = S.elapsed;
+  S.blocks.push({g, n, k, rc, u:100-k-rc, sec:blockSec});
+  save();
+
+  const totalK = countKnown();
+  const done = totalDone();
+  const rate = Math.round(totalK/done*100);
+  const remain12 = Math.max(0, 4500 - (S.res[0].length+S.res[1].length));
+  const spd = done/Math.max(1,S.elapsed);
+  const eta = remain12/spd;
+
+  openModal(`
+    <div class="m-title">${GNAME[g]} · 第 ${n/100} 关 通过</div>
+    <div class="m-sub">已过 ${done} 字 · 本关用时 ${fmt(blockSec)}</div>
+    <div class="big-num"><b>${rate}<span style="font-size:26px">%</span></b><span>累计掌握率（${totalK} / ${done}）</span></div>
+    <div class="grid">
+      <div class="cell"><div class="k">本 100 字 · 掌握</div><div class="v">${k}</div></div>
+      <div class="cell"><div class="k">本 100 字 · 会认不会写</div><div class="v" style="color:var(--gold-2)">${rc}</div></div>
+      <div class="cell"><div class="k">本 100 字 · 不熟</div><div class="v" style="color:#b3402f">${100-k-rc}</div></div>
+    </div>
+    <div class="row"><span>本关节奏</span><b>${(blockSec/100).toFixed(1)} 秒/字</b></div>
+    <div class="row"><span>已用时间</span><b>${fmt(S.elapsed)}</b></div>
+    <div class="row"><span>甲+乙 剩余</span><b>${remain12} 字</b></div>
+    <div class="row"><span>按当前速度预计还需</span><b>${remain12? fmt(eta) : '已完成'}</b></div>
+    ${unknownChars.length? `<div style="margin-top:16px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">本关不熟字（${unknownChars.length}）</div><div class="chips">${unknownChars.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`:''}
+    ${recogChars.length? `<div style="margin-top:16px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">本关会认不会写（${recogChars.length}）</div><div class="chips">${recogChars.map(c=>`<span class="chip gold">${c}</span>`).join('')}</div>`:''}
+    <div class="m-actions"><button class="btn primary" id="btnGo">继续 <span style="opacity:.6;font-size:12px">Enter</span></button></div>
+  `, ()=>{ $('#btnGo').onclick = ()=>{ closeModal(); render(); }; });
+}
+
+function countKnown(){ let k=0; for(let i=0;i<3;i++) for(const c of S.res[i]) if(c==='1') k++; return k; }
+
+/* ---------------- 关卡完成 ---------------- */
+function levelClear(g){
+  save();
+  if(g<2){
+    const n = S.res[g].length;
+    let k=0, rc=0; for(const c of S.res[g]){ if(c==='1') k++; else if(c==='2') rc++; }
+    const sec = S.elapsed;
+    openModal(`
+      <div class="m-title">${GNAME[g]} 通关</div>
+      <div class="m-sub">${n} 字 · 用时 ${fmt(sec)}</div>
+      <div class="big-num"><b>${Math.round(k/n*100)}<span style="font-size:26px">%</span></b><span>本关掌握率（${k} / ${n}）</span></div>
+      <div class="grid">
+        <div class="cell"><div class="k">掌握</div><div class="v">${k}</div></div>
+        <div class="cell"><div class="k">会认不会写</div><div class="v" style="color:var(--gold-2)">${rc}</div></div>
+        <div class="cell"><div class="k">不熟</div><div class="v" style="color:#b3402f">${n-k-rc}</div></div>
+      </div>
+      <div class="row"><span>速度</span><b>${(sec/n).toFixed(1)} 秒/字</b></div>
+      ${g===0? `<div class="row"><span>甲+乙 已用</span><b>${fmt(S.elapsed)} / 建议 4:00:00</b></div>`:''}
+      <div class="m-actions"><button class="btn primary" id="btnGo">进入${GNAME[g+1]} <span style="opacity:.6;font-size:12px">Enter</span></button></div>
+    `, ()=>{ $('#btnGo').onclick = ()=>{ closeModal(); render(); }; });
+  }else{
+    showReport();
+  }
+}
+
+/* ---------------- 总报告 ---------------- */
+function showReport(){
+  let k=0,rc=0,t=0; const rows=[];
+  for(let g=0;g<3;g++){
+    const n=S.res[g].length; let kk=0, rr=0;
+    for(const c of S.res[g]){ if(c==='1') kk++; else if(c==='2') rr++; }
+    k+=kk; rc+=rr; t+=n;
+    rows.push(`<div class="row"><span>${GNAME[g]}</span><b>${kk} 掌握 · ${rr} 会认 · ${n-kk-rr} 不熟 <span style="color:var(--ink-3);font-weight:400">(${n?Math.round(kk/n*100):0}%)</span></b></div>`);
+  }
+  const rate = t? Math.round(k/t*100):0;
+  const bad = allUnknown();
+  const rcog = allRecog();
+  openModal(`
+    <div class="m-title">全部通关</div>
+    <div class="m-sub">${t} 字 · 用时 ${fmt(S.elapsed)} · 平均 ${(S.elapsed/Math.max(1,t)).toFixed(1)} 秒/字</div>
+    <div class="big-num"><b>${rate}<span style="font-size:26px">%</span></b><span>总掌握率（${k} / ${t}）· 会认不会写 ${rc}</span></div>
+    ${rows.join('')}
+    <div style="margin-top:18px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">会认不会写（${rcog.length}）</div>
+    <div class="chips" style="max-height:120px">${rcog.slice(0,400).map(c=>`<span class="chip gold">${c}</span>`).join('')}</div>
+    <div style="margin-top:18px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">不熟字（${bad.length}）</div>
+    <div class="chips" style="max-height:180px">${bad.slice(0,600).map(c=>`<span class="chip">${c}</span>`).join('')}</div>
+    <div class="m-actions">
+      <button class="btn" id="btnExport">导出字表</button>
+      <button class="btn" id="btnReview">重练不熟字</button>
+      <button class="btn" id="btnReview2">练会认不写</button>
+      <button class="btn primary" id="btnRestart">重新开始</button>
+    </div>
+  `, ()=>{
+    $('#btnExport').onclick = exportTxt;
+    $('#btnReview').onclick = ()=> startReview('0');
+    $('#btnReview2').onclick = ()=> startReview('2');
+    $('#btnRestart').onclick = ()=>{ if(confirm('清空全部进度，重新开始？')){ localStorage.removeItem(KEY); location.reload(); } };
+  });
+}
+function allUnknown(){
+  return collect('0');
+}
+function allRecog(){
+  return collect('2');
+}
+function collect(code){
+  const out=[];
+  for(let g=0;g<3;g++){
+    for(let i=0;i<S.res[g].length;i++){
+      if(S.res[g][i]===code) out.push(DATA.chars[OFFSET[g]+ORDER[g][i]]);
+    }
+  }
+  return out;
+}
+function exportTxt(){
+  const lines = ['汉字应用水平测试 · 生字表','生成时间：'+new Date().toLocaleString(),''];
+  for(const [code, label] of [['0','不熟'],['2','会认不会写']]){
+    lines.push('======== '+label+' ========');
+    for(let g=0;g<3;g++){
+      const arr=[];
+      for(let i=0;i<S.res[g].length;i++) if(S.res[g][i]===code) arr.push(DATA.chars[OFFSET[g]+ORDER[g][i]]);
+      lines.push(`【${GNAME[g]}】${label} ${arr.length} 字`);
+      lines.push(arr.join(' '));
+      lines.push('');
+    }
+  }
+  const blob = new Blob([lines.join('\n')], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '生字表.txt';
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 3000);
+}
+function startReview(code){
+  if(!S) return;
+  if(!ORDER[0].length) buildOrder();
+  const list = collect(code||'0');
+  if(!list.length){ toast(code==='2'?'没有会认不会写的字':'没有不熟字'); return; }
+  REVIEW = list.slice(0, 400);
+  reviewLabel = code==='2' ? '复习 · 会认不会写' : '复习 · 不熟字';
+  closeModal(); startPlay(true);
+}
+let REVIEW = null;
+let reviewLabel = '复习 · 不熟字';
+
+/* ---------------- 弹窗 ---------------- */
+let modalOnClose = null;
+function openModal(html, onOpen){
+  closePeek();
+  $('#modal').innerHTML = html;
+  $('#mask').classList.add('on');
+  paused = true;
+  if(onOpen) onOpen();
+}
+function closeModal(){
+  $('#mask').classList.remove('on');
+  paused = false;
+  lastTick = Date.now();
+}
+
+/* ---------------- toast ---------------- */
+let toastId=null;
+function toast(msg){
+  const t=$('#toast'); t.textContent=msg; t.classList.add('on');
+  clearTimeout(toastId); toastId=setTimeout(()=>t.classList.remove('on'),1600);
+}
+
+/* ---------------- 撤销上一个操作 ---------------- */
+let undoStack = [];
+function pushUndo(label){
+  undoStack.push({res: S.res.slice(), label});
+  if(undoStack.length > 60) undoStack.shift();
+}
+function undoLast(){
+  if(!S) return;
+  if(cur && cur.review){ toast('复习模式不能撤销'); return; }
+  if(!undoStack.length){ toast('没有可撤销的操作'); return; }
+  const snap = undoStack.pop();
+  S.res = snap.res.slice();
+  undoPtr = null;
+  closePeek();
+  if($('#mask').classList.contains('on')) closeModal();
+  save();
+  render();
+  toast('已撤销：' + snap.label);
+}
+
+/* ---------------- 查看上一题（旁栏，暂停计时） ---------------- */
+let peekOpen = false;
+function peekPrev(){
+  if(!S) return;
+  if(cur && cur.review){ toast('复习模式暂不支持'); return; }
+  if($('#mask').classList.contains('on')) return;
+  if(peekOpen){ closePeek(); return; }
+  const total = S.res[0].length + S.res[1].length + S.res[2].length;
+  if(!total){ toast('还没有上一题'); return; }
+  const pos = recordPos(total-1);
+  if(!pos) return;
+  const idx = OFFSET[pos.g] + ORDER[pos.g][pos.i];
+  const ch = DATA.chars[idx], py = DATA.py[idx]||'', gl = DATA.gl[idx]||'';
+  const code = S.res[pos.g][pos.i];
+  const type = (hash(ch)%10) < 6 ? '音' : (gl ? '义' : '音');
+  const all = (DATA.pyAll[idx]||'').split('|').filter(x=>x && x!==py);
+  $('#peekLv').textContent = GNAME[pos.g] + ' · 第 ' + (Math.floor(pos.i/100)+1) + ' 关';
+  $('#peekHz').textContent = ch;
+  $('#peekQ').textContent = type==='音' ? '当时问的是：读音' : '当时问的是：释义';
+  $('#peekA').innerHTML = '<span class="py">'+py+'</span>'
+    + (gl ? '<span>'+gl+'</span>' : '')
+    + (all.length ? '<span class="more">多音字：'+all.slice(0,4).join('、')+'</span>' : '');
+  const m = $('#peekMark');
+  m.textContent = code==='1' ? '掌握' : (code==='2' ? '会认不会写' : '不熟');
+  m.className = code==='1' ? 'k1' : (code==='2' ? 'k2' : 'k0');
+  $('#peek').classList.add('on');
+  document.body.classList.add('peek-open');
+  peekOpen = true;
+  paused = true;
+  lastTick = Date.now();
+}
+function closePeek(){
+  if(!peekOpen) return;
+  peekOpen = false;
+  $('#peek').classList.remove('on');
+  document.body.classList.remove('peek-open');
+  paused = false;
+  lastTick = Date.now();
+}
+
+/* ---------------- 回退：把上一题改判为不熟 ---------------- */
+let undoPtr = null;          // 连续按 U 时逐条往回走
+function recordPos(p){
+  let acc = 0;
+  for(let g=0; g<3; g++){
+    const n = S.res[g].length;
+    if(p < acc+n) return {g, i: p-acc};
+    acc += n;
+  }
+  return null;
+}
+function markPrevWrong(){
+  if(!S) return;
+  closePeek();
+  if(cur && cur.review){ toast('复习模式不能回退'); return; }
+  const total = S.res[0].length + S.res[1].length + S.res[2].length;
+  if(!total){ toast('还没有可回退的题'); return; }
+  let p = (undoPtr===null) ? total-1 : Math.max(0, undoPtr-1);
+  undoPtr = p;
+  const pos = recordPos(p);
+  if(!pos) return;
+  const ch = DATA.chars[OFFSET[pos.g] + ORDER[pos.g][pos.i]];
+  if(S.res[pos.g][pos.i] === '1'){
+    pushUndo('改判「'+ch+'」为不熟');
+    S.res[pos.g] = S.res[pos.g].slice(0,pos.i) + '0' + S.res[pos.g].slice(pos.i+1);
+    toast('「'+ch+'」已改记为不熟');
+  }else if(S.res[pos.g][pos.i] === '2'){
+    toast('「'+ch+'」本来就是会认不会写');
+  }else{
+    toast('「'+ch+'」本来就不熟');
+  }
+  save(); updateHud();
+}
+
+/* ---------------- 交互 ---------------- */
+function answer(choice){
+  if(locked || !cur || S.mode!=='quiz') return;
+  if(choice === cur.ans) record('known');
+  else record('unknown');
+}
+
+/* ---------------- 开始 ---------------- */
+function startPlay(review){
+  if(!S) S = newState();
+  S.started = true;
+  buildOrder();
+  $('#home').classList.add('hide');
+  $('#play').classList.remove('hide');
+  blockStart = S.elapsed;
+  if(review && REVIEW){
+    // 复习模式：临时队列
+    reviewQueue = REVIEW.map(ch=>({ch}));
+    renderReview();
+  }else{
+    render();
+  }
+  startTimer();
+  save();
+}
+
+let reviewQueue = null, reviewIdx = 0;
+function renderReview(){
+  if(!reviewQueue || reviewIdx>=reviewQueue.length){ reviewQueue=null; toast('不熟字已过完'); showReport(); return; }
+  const ch = reviewQueue[reviewIdx].ch;
+  if(!ch){ reviewIdx++; renderReview(); return; }
+  const idx = DATA.chars.indexOf(ch);
+  cur = {g:curGroup(), i:0, idx, ch, type:'音', opts:[], ans:0, py:DATA.py[idx]||'', gl:DATA.gl[idx]||'', review:true};
+  locked = false;
+  $('#cardLv').textContent = reviewLabel;
+  $('#tag').textContent = '读音';
+  $('#hz').textContent = ch;
+  $('#hz').classList.remove('pop'); void $('#hz').offsetWidth; $('#hz').classList.add('pop');
+  $('#q').innerHTML = '这个字读什么？';
+  $('#reveal').className='reveal'; $('#reveal').innerHTML='';
+  $('#opts').classList.add('hide');
+  updateHud();
+}
+
+/* ---------------- 事件绑定 ---------------- */
+function bind(){
+  $('#btnStart').onclick = ()=>{
+    const old = load();
+    if(old && (old.res[0].length+old.res[1].length+old.res[2].length)>0){
+      if(!confirm('已有进度 '+ (old.res[0].length+old.res[1].length+old.res[2].length) +' 字，开始新的通关会清空它。确定？')) return;
+    }
+    S = newState(); REVIEW=null; save(); startPlay();
+  };
+  $('#btnResume').onclick = ()=>{
+    const s = load();
+    if(!s){ toast('没有可继续的进度'); return; }
+    S = s; buildOrder();
+    document.documentElement.style.setProperty('--hzscale', [1,1.16,1.34][S.font||0]);
+    $('#home').classList.add('hide'); $('#play').classList.remove('hide');
+    blockStart = S.elapsed; render(); startTimer();
+  };
+  $('#btnSettings').onclick = ()=>{ if(!S) S=newState(); openSettings(true); };
+  $('#btnTheme').onclick = toggleTheme;
+  $('#btnYes').onclick = ()=> record('known');
+  $('#btnNo').onclick = ()=> record('unknown');
+  $('#btnRecog').onclick = ()=> record('recog');
+  $('#btnPrev').onclick = markPrevWrong;
+  $('#btnUndo').onclick = undoLast;
+  $('#btnPeek').onclick = peekPrev;
+  $('#peekClose').onclick = closePeek;
+  $('#btnPause').onclick = ()=> pauseMenu();
+  $('#btnStat').onclick = ()=> statsModal();
+  $('#opts').addEventListener('click', e=>{
+    const b = e.target.closest('.opt'); if(!b) return;
+    answer(+b.dataset.i);
+  });
+  document.addEventListener('keydown', e=>{
+    if($('#mask').classList.contains('on')){
+      if(e.key==='Enter'){ const b=$('#modal').querySelector('.btn.primary'); if(b) b.click(); }
+      if(e.key==='Escape'){ const c=$('#modal').querySelector('#btnClose'); if(c) c.click(); }
+      return;
+    }
+    if($('#play').classList.contains('hide')) return;
+    if(peekOpen){
+      if(e.key==='v'||e.key==='V'||e.key==='Escape'){ e.preventDefault(); closePeek(); return; }
+      closePeek();                       // 其它按键：先收起侧栏，再照常处理
+    }
+    if(e.key==='1'||e.key==='2'){ if(S.mode==='quiz') answer(+e.key-1); }
+    else if(e.key==='f'||e.key==='F'||e.key==='ArrowLeft'){ record('unknown'); }
+    else if(e.key==='j'||e.key==='J'||e.key==='ArrowRight'){ record('known'); }
+    else if(e.key==='w'||e.key==='W'){ record('recog'); }
+    else if(e.key===' '){ e.preventDefault(); if(locked) return; if(S.mode==='quiz'){ record('unknown'); } else { showReveal('peek'); } }
+    else if(e.key==='z'||e.key==='Z'){ e.preventDefault(); undoLast(); }
+    else if(e.key==='u'||e.key==='U'||e.key==='Backspace'){ e.preventDefault(); markPrevWrong(); }
+    else if(e.key==='v'||e.key==='V'){ e.preventDefault(); peekPrev(); }
+    else if(e.key==='Escape'){ pauseMenu(); }
+  });
+}
+
+/* ---------------- 暂停 / 设置 / 统计 ---------------- */
+function pauseMenu(){
+  if($('#mask').classList.contains('on')) return;
+  openModal(`
+    <div class="m-title">已暂停</div>
+    <div class="m-sub">${GNAME[curGroup()]} · 已过 ${totalDone()} 字 · 用时 ${fmt(S.elapsed)}</div>
+    <div class="m-actions" style="justify-content:flex-start;flex-wrap:wrap">
+      <button class="btn primary" id="btnGo">继续</button>
+      <button class="btn" id="btnSt">统计</button>
+      <button class="btn" id="btnSet">设置</button>
+      <button class="btn ghost" id="btnHome">回首页</button>
+    </div>
+  `, ()=>{
+    $('#btnGo').onclick = closeModal;
+    $('#btnSt').onclick = ()=>{ closeModal(); statsModal(); };
+    $('#btnSet').onclick = ()=> openSettings(false);
+    $('#btnHome').onclick = ()=>{ closeModal(); save(); location.reload(); };
+  });
+}
+function openSettings(fromHome){
+  openModal(`
+    <div class="m-title">设置</div>
+    <div class="m-sub">随时可改，立即生效</div>
+    <div class="row"><span>答题模式</span><b id="modeV">${S.mode==='quiz'?'选择题（点击判分）':'快速自评（推荐）'}</b></div>
+    <div class="row"><span>字号</span><b id="fontV">${['标准','大','特大'][S.font]}</b></div>
+    <div class="row"><span>主题</span><b id="themeV">${document.documentElement.dataset.theme==='dark'?'墨夜（深色）':'宣纸（浅色）'}</b></div>
+    <div class="m-actions" style="justify-content:flex-start">
+      <button class="btn" id="btnMode">切换答题模式</button>
+      <button class="btn" id="btnFont">切换字号</button>
+      <button class="btn" id="btnTheme2">切换主题</button>
+      <button class="btn ghost" id="btnClose">关闭</button>
+    </div>
+  `, ()=>{
+    $('#btnMode').onclick = ()=>{
+      S.mode = S.mode==='quiz'?'self':'quiz'; save();
+      $('#modeV').textContent = S.mode==='quiz'?'选择题（点击判分）':'快速自评（推荐）';
+      if(!$('#play').classList.contains('hide')) { closeModal(); render(); }
+    };
+    $('#btnFont').onclick = ()=>{
+      S.font = (S.font+1)%3; save();
+      $('#fontV').textContent = ['标准','大','特大'][S.font];
+      document.documentElement.style.setProperty('--hzscale', [1,1.16,1.34][S.font]);
+    };
+    $('#btnClose').onclick = ()=>{ closeModal(); if(fromHome) renderHome(); };
+    const t2 = $('#btnTheme2');
+    if(t2) t2.onclick = ()=>{
+      toggleTheme();
+      const v = $('#themeV');
+      if(v) v.textContent = document.documentElement.dataset.theme==='dark'?'墨夜（深色）':'宣纸（浅色）';
+    };
+  });
+}
+function statsModal(){
+  const g = curGroup();
+  let k=0,rc=0,t=0;
+  for(let i=0;i<3;i++){ for(const c of S.res[i]){ t++; if(c==='1')k++; else if(c==='2')rc++; } }
+  const done = totalDone();
+  const remain12 = Math.max(0, 4500 - (S.res[0].length+S.res[1].length));
+  const spd = done/Math.max(1,S.elapsed);
+  const rows = [0,1,2].map(i=>{
+    const n=S.res[i].length; let kk=0, rr=0;
+    for(const c of S.res[i]){ if(c==='1') kk++; else if(c==='2') rr++; }
+    return `<div class="row"><span>${GNAME[i]}</span><b>${kk} 掌握 · ${rr} 会认 · ${n-kk-rr} 不熟</b></div>`;
+  }).join('');
+  const bad = allUnknown();
+  const rcog = allRecog();
+  openModal(`
+    <div class="m-title">统计</div>
+    <div class="m-sub">${done} 字 · 用时 ${fmt(S.elapsed)}</div>
+    <div class="big-num"><b>${t?Math.round(k/t*100):0}<span style="font-size:26px">%</span></b><span>掌握率（${k} / ${t}）· 会认不会写 ${rc}</span></div>
+    ${rows}
+    <div class="row"><span>甲+乙 剩余</span><b>${remain12} 字</b></div>
+    <div class="row"><span>预计还需</span><b>${remain12&&spd? fmt(remain12/spd):'—'}</b></div>
+    <div class="row"><span>均速</span><b>${(spd*60).toFixed(0)} 字/分</b></div>
+    ${rcog.length? `<div style="margin-top:16px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">会认不会写（${rcog.length}）</div><div class="chips" style="max-height:110px">${rcog.map(c=>`<span class="chip gold">${c}</span>`).join('')}</div>`:''}
+    ${bad.length? `<div style="margin-top:16px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">不熟字（${bad.length}）</div><div class="chips" style="max-height:160px">${bad.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`:''}
+    <div class="m-actions"><button class="btn primary" id="btnClose">继续</button></div>
+  `, ()=>{ $('#btnClose').onclick = closeModal; });
+}
+
+/* ---------------- 首页渲染 ---------------- */
+function renderHome(){
+  const s = load();
+  const cards = [0,1,2].map(g=>{
+    const n = s? s.res[g].length : 0;
+    const pct = n/GTARGET[g]*100;
+    return `<div class="lvc">
+      <div class="n">${GNAME[g]}</div>
+      <div class="c">${GTARGET[g]}<span style="font-size:13px;font-weight:400;color:var(--ink-3)"> 字</span></div>
+      <div class="d">${n? '已过 '+n+' 字 · '+Math.round(pct)+'%' : '未开始'}</div>
+      <div class="bar"><i style="width:${pct}%"></i></div>
+    </div>`;
+  }).join('');
+  $('#lvCards').innerHTML = cards;
+  $('#btnResume').style.display = s && (s.res[0].length||s.res[1].length||s.res[2].length) ? '' : 'none';
+}
+renderHome();
+applyTheme();
+bind();
+</script>
+</body>
+</html>
