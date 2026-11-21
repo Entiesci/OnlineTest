@@ -5,7 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light only">
-<title>汉字应用水平测试 · 5500 字通关</title>
+<title>汉字应用水平测试 5500字在线测试｜甲/乙/丙表 + 考前急救1000易错字</title>
+<meta name="description" content="按《汉字应用水平等级及测试大纲》附录A字表制作的在线测试：甲表4000、乙表500、丙表1000，另设考前急救1000个易错字（形近、多音、生僻）。每字一题考读音或释义，多音字给出例词，自动统计掌握率、不熟字，可导出字表。">
+<meta name="keywords" content="汉字应用水平测试,汉字水平测试,5500字,甲表,乙表,丙表,多音字,易错字,错别字,读音测试,在线测试,HZC,普通话,语文">
+<meta name="robots" content="index,follow">
+<meta name="author" content="Entiesci">
+<link rel="canonical" href="https://entiesci.github.io/OnlineTest/hzc/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="汉字应用水平测试 · 5500字通关">
+<meta property="og:title" content="汉字应用水平测试 5500字在线测试｜易错字·多音字">
+<meta property="og:description" content="甲表4000 / 乙表500 / 丙表1000 逐字测试，另设考前急救1000易错字。每字一题，自动统计掌握率与不熟字。">
+<meta property="og:url" content="https://entiesci.github.io/OnlineTest/hzc/">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"汉字应用水平测试 · 5500字通关",
+  "url":"https://entiesci.github.io/OnlineTest/hzc/",
+  "applicationCategory":"EducationalApplication",
+  "operatingSystem":"Web",
+  "inLanguage":"zh-CN",
+  "description":"依据《汉字应用水平等级及测试大纲》附录A字表，逐字测试甲表4000字、乙表500字、丙表1000字的读音与释义，并提供考前急救1000个易错字。",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},
+  "featureList":["5500字逐字测试","多音字例词读音","考前急救1000易错字","掌握率统计","不熟字导出"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"汉字应用水平测试要考多少字？","acceptedAnswer":{"@type":"Answer","text":"《汉字应用水平测试字表》总字量5500字，分甲表4000字、乙表500字、丙表1000字三个子表；正式试卷120题，70%选自甲表、20%选自乙表、10%选自丙表。"}},
+    {"@type":"Question","name":"这个在线测试怎么用？","acceptedAnswer":{"@type":"Answer","text":"按甲组→乙组→丙组的顺序逐字出题，每个字一题考读音或释义。想好后点“不熟”“会认不会写”或“掌握”，每过100字给出一次统计，结束后可导出不熟字表。"}},
+    {"@type":"Question","name":"多音字怎么考？","acceptedAnswer":{"@type":"Answer","text":"多音字会给出一个例词（如“擂台”），问这个词里的那个字读什么，选项是这个字的不同读音。"}}
+  ]
+}
+</script>
 <style>
 :root{
   color-scheme: light;
@@ -122,6 +159,10 @@ html[data-theme="dark"] .tag.multi{border-color:#4a3c25; background:#241d12}
   transition:transform .18s ease, opacity .18s ease;
 }
 .hz.pop{animation:pop .28s ease}
+.hz em{font-style:normal;color:var(--red);text-shadow:0 0 30px rgba(209,88,63,.25)}
+.hz.w2{font-size:calc(clamp(96px,17vh,190px) * var(--hzscale,1) * .60)}
+.hz.w3{font-size:calc(clamp(96px,17vh,190px) * var(--hzscale,1) * .44)}
+.hz.w4{font-size:calc(clamp(96px,17vh,190px) * var(--hzscale,1) * .34)}
 @keyframes pop{0%{transform:scale(.94);opacity:.3}100%{transform:scale(1);opacity:1}}
 .q{font-size:15px; color:var(--ink-2); letter-spacing:.06em; min-height:22px}
 .opts{display:flex; gap:14px; margin-top:16px; width:min(520px,100%)}
@@ -252,7 +293,10 @@ h1{font-size:clamp(26px,3.4vw,40px); font-weight:600; letter-spacing:.04em; marg
 .home .lead{color:var(--ink-2); font-size:14.5px; line-height:1.9; margin:0 auto 26px; max-width:620px}
 .home .lead b{color:var(--ink)}
 .home .lead code{background:var(--track); color:var(--gold-2); padding:1px 6px; border-radius:5px; font-size:13px}
-.lv-cards{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin:0 0 26px; text-align:left}
+.lv-cards{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:0 0 26px; text-align:left}
+.lvc.cram{border-color:#e0cfab; background:linear-gradient(180deg,#fdf8ec,#fbf3e2)}
+html[data-theme="dark"] .lvc.cram{border-color:#4a3c25; background:linear-gradient(180deg,#221b11,#1d1710)}
+.lvc.cram .n{color:var(--gold-2)}
 .lvc{border:1px solid var(--line); border-radius:16px; padding:16px 18px; background:var(--panel); box-shadow:var(--shadow)}
 .lvc .n{font-size:12px; color:var(--ink-3); letter-spacing:.16em}
 .lvc .c{font-size:26px; font-weight:600; margin:6px 0 2px; font-variant-numeric:tabular-nums}
@@ -262,6 +306,14 @@ h1{font-size:clamp(26px,3.4vw,40px); font-weight:600; letter-spacing:.04em; marg
 .home-actions{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
 .keys{display:flex; gap:18px; justify-content:center; flex-wrap:wrap; margin-top:28px; color:var(--ink-3); font-size:12px}
 .keys kbd{border:1px solid var(--line-2); border-bottom-width:2px; border-radius:5px; padding:1px 6px; background:var(--panel); color:var(--ink-2); font-size:11px; margin-right:4px}
+.about{max-width:720px; margin:40px auto 0; padding-top:26px; border-top:1px solid var(--line); text-align:left; color:var(--ink-2); font-size:13.5px; line-height:1.95}
+.about h2{font-size:16px; color:var(--ink); letter-spacing:.04em; margin:0 0 12px; font-weight:600}
+.about h3{font-size:14px; color:var(--ink); margin:22px 0 8px; font-weight:600}
+.about p{margin:0 0 10px}
+.about b{color:var(--ink)}
+.about .faq{margin:0}
+.about dt{color:var(--ink); font-weight:600; margin-top:12px; font-size:13.5px}
+.about dd{margin:4px 0 0; color:var(--ink-2)}
 
 /* ---------- toast ---------- */
 #toast{
@@ -295,12 +347,13 @@ h1{font-size:clamp(26px,3.4vw,40px); font-weight:600; letter-spacing:.04em; marg
       <p class="lead">
         依据《汉字应用水平等级及测试大纲》附录 A 字表，按 <b>甲表 4000 → 乙表 500 → 丙表 1000</b> 的顺序闯关，
         组内随机打乱。每个字一道题，考 <b>字音</b> 或 <b>字义</b>；想好后点下方 <code>不熟</code> / <code>会认不会写</code> / <code>掌握</code>，
-        每过 100 字出一次统计。建议：<b>4 小时内过完甲组 + 乙组</b>。
+        每过 100 字出一次统计。建议：<b>4 小时内过完甲组 + 乙组</b>。<br>
+        另备一关 <b>考前急救</b>：1000 个易错字（形近易混 · 多音易读 · 生僻易忘），考前刷一遍最快。
       </p>
       <div class="lv-cards" id="lvCards"></div>
       <div class="home-actions">
-        <button class="btn primary" id="btnStart" style="height:52px;padding:0 34px;font-size:16px">开始通关</button>
-        <button class="btn" id="btnResume" style="height:52px;padding:0 30px;font-size:16px">继续上次</button>
+        <button class="btn primary" id="btnStart" style="height:52px;padding:0 30px;font-size:16px">开始通关</button>
+        <button class="btn" id="btnCram" style="height:52px;padding:0 26px;font-size:16px">考前急救 · 1000 易错字</button>
         <button class="btn ghost" id="btnSettings" style="height:52px">设置</button>
       </div>
       <div class="keys">
@@ -314,17 +367,31 @@ h1{font-size:clamp(26px,3.4vw,40px); font-weight:600; letter-spacing:.04em; marg
         <span><kbd>V</kbd> 查看上一题</span>
         <span><kbd>Esc</kbd> 暂停</span>
       </div>
+
+      <section class="about">
+        <h2>关于这个汉字水平在线测试</h2>
+        <p>本工具依据教育部、国家语委发布的《汉字应用水平等级及测试大纲》附录 A《汉字应用水平测试字表》制作。该字表总字量 5500 字，分三个子表：<b>甲表 4000 字</b>（常用字）、<b>乙表 500 字</b>、<b>丙表 1000 字</b>。正式测试试卷由四个部分共 120 道试题构成，其中 70% 选自甲表、20% 选自乙表、10% 选自丙表，答题时间 80 分钟。</p>
+        <p>这里的在线测试把 5500 个字逐个过一遍：按甲组 → 乙组 → 丙组的顺序闯关，组内随机打乱；每个字一题，考<b>字音</b>或<b>字义</b>。多音字会给出一个例词（例如「擂台」「银行」「差不多」），问的是这个词里的那个字读什么，选项都是这个字自己的读音，用来分辨多音字的实际读法。</p>
+        <p>另外设了「<b>考前急救</b>」一关：1000 个易错字，包含形近易混字（己/已/巳、戊/戌/戍、辨/辩/辫/瓣）、多音易读字和生僻易忘字，适合考前几天集中刷一遍。每组每过 100 字会给出一次统计：掌握率、会认不会写、不熟字数量、用时和按当前速度的预计完成时间；结束后可以导出「不熟字」和「会认不会写」的字表。</p>
+        <h3>常见问题</h3>
+        <dl class="faq">
+          <dt>汉字应用水平测试一共考多少字？</dt>
+          <dd>测试字表共 5500 字，分甲表 4000、乙表 500、丙表 1000。一级水平要求认识并使用 4500–5500 字，二级 4000–4500 字，三级 3500–4000 字。</dd>
+          <dt>「会认不会写」这一档有什么用？</dt>
+          <dd>汉字应用水平测试的第四部分是汉字书写填空，会认但写不出是常见失分点。单独标记这一档，可以统计出「认得但提笔忘字」的字，集中练习书写。</dd>
+          <dt>成绩会保存吗？</dt>
+          <dd>会。进度和成绩保存在浏览器本地，关掉页面再打开可以接着做；换浏览器或清理浏览器数据后会丢失，建议做完导出字表。</dd>
+          <dt>手机上能用吗？</dt>
+          <dd>可以，页面自适应手机屏幕，触屏点按钮即可。</dd>
+        </dl>
+      </section>
     </div>
   </div>
 
   <!-- ================= 答题 ================= -->
   <div id="play" class="hide" style="flex:1;display:flex;flex-direction:column;min-height:0">
     <div class="hud">
-      <div class="levels" id="levels">
-        <span class="lv" data-g="0">甲组</span>
-        <span class="lv" data-g="1">乙组</span>
-        <span class="lv" data-g="2">丙组</span>
-      </div>
+      <div class="levels" id="levels"></div>
       <div class="hud-mid">
         <div class="hud-row">
           <div class="hud-count"><b id="cNow">0</b> / <span id="cAll">0</span> 字</div>
@@ -389,9 +456,14 @@ h1{font-size:clamp(26px,3.4vw,40px); font-weight:600; letter-spacing:.04em; marg
 const DATA = /*__DATA__*/{chars:"",py:[],pyAll:[],gl:[],sizes:[0,0,0]};
 const TOTAL = DATA.chars.length;
 const OFFSET = [0, DATA.sizes[0], DATA.sizes[0]+DATA.sizes[1]];
-const GNAME = ['甲组','乙组','丙组'];
-const GTARGET = [4000, 500, 1000];
-const KEY = 'hz_tongguan_v1';
+const POOLS = {
+  main: { id:'main', key:'hz_tongguan_v1', names:['甲组','乙组','丙组'], targets:[4000,500,1000], cram:false },
+  cram: { id:'cram', key:'hz_cram_v1',       names:['急救'],             targets:[1000],             cram:true  }
+};
+let POOL = POOLS.main;
+let NG = 3;
+let GNAME = POOL.names;
+let GTARGET = POOL.targets;
 const TARGET_SEC = 4*3600;        // 甲+乙 建议 4 小时
 
 /* ---------------- 工具 ---------------- */
@@ -427,7 +499,8 @@ let blockStart = 0;       // 本百字开始时间
 function newState(seed){
   return {
     seed: seed || Math.floor(Math.random()*1e9),
-    res: ['','',''],       // '1'=掌握 '0'=不熟
+    pool: POOL.id,
+    res: Array(NG).fill(''),   // '1'=掌握 '0'=不熟 '2'=会认不会写
     elapsed: 0,            // 累计秒
     started: false,
     mode: 'self',          // self | quiz
@@ -437,28 +510,51 @@ function newState(seed){
     blocks: [],            // 每 100 字统计
   };
 }
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
-function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)); if(s&&s.res&&s.res.length===3) return s; }catch(e){} return null; }
+function save(){ try{ localStorage.setItem(POOL.key, JSON.stringify(S)); }catch(e){} }
+function loadFor(pid){ try{ const p=POOLS[pid]; const s=JSON.parse(localStorage.getItem(p.key)); if(s&&s.res&&s.res.length===p.targets.length) return s; }catch(e){} return null; }
+function load(){ return loadFor(POOL.id); }
 
 /* 生成/还原每组顺序 */
-let ORDER = [[],[],[]];
+let ORDER = [];
 function buildOrder(){
-  ORDER = [[],[],[]];
-  for(let g=0;g<3;g++){
+  ORDER = [];
+  for(let g=0;g<NG;g++){
     const rnd = mulberry32(S.seed + g*7919);
-    const arr = Array.from({length:GTARGET[g]},(_,i)=>i);
-    shuffle(arr,rnd);
+    let arr;
+    if(POOL.cram){
+      // 急救：按「形近 → 多音 → 生僻」分块，块内打乱，先刷高收益的
+      const bucket = {};
+      DATA.emerg.cat.forEach((c,i)=>{ (bucket[c] = bucket[c] || []).push(i); });
+      arr = [];
+      for(const k of ['形近','多音','生僻']){
+        const a = (bucket[k]||[]).slice();
+        shuffle(a, rnd);
+        arr = arr.concat(a);
+      }
+    }else{
+      arr = Array.from({length:GTARGET[g]},(_,i)=>i);
+      shuffle(arr,rnd);
+    }
     ORDER[g] = arr;
   }
 }
 
 /* ---------------- 进度 ---------------- */
 function curGroup(){
-  for(let g=0;g<3;g++) if(S.res[g].length < GTARGET[g]) return g;
-  return 2;
+  for(let g=0;g<NG;g++) if(S.res[g].length < GTARGET[g]) return g;
+  return NG-1;
 }
-function doneAll(){ return S.res[0].length>=4000 && S.res[1].length>=500 && S.res[2].length>=1000; }
-function totalDone(){ return S.res[0].length+S.res[1].length+S.res[2].length; }
+function doneAll(){ for(let g=0;g<NG;g++) if(S.res[g].length < GTARGET[g]) return false; return true; }
+function totalDone(){ let n=0; for(let g=0;g<NG;g++) n+=S.res[g].length; return n; }
+function charIdx(g,i){
+  const o = ORDER[g][i];
+  return POOL.cram ? DATA.emerg.idx[o] : OFFSET[g] + o;
+}
+function catOf(idx){
+  if(!POOL.cram) return '';
+  const k = DATA.emerg.idx.indexOf(idx);
+  return k>=0 ? DATA.emerg.cat[k] : '';
+}
 function rateOf(g){
   const r=S.res[g]; if(!r.length) return null;
   let k=0; for(const c of r) if(c==='1') k++;
@@ -468,24 +564,36 @@ function rateOf(g){
 /* ---------------- 卡片 ---------------- */
 function makeCard(g){
   const i = S.res[g].length;                 // 本组第 i 个字（0 起）
-  const oi = ORDER[g][i];
-  const idx = OFFSET[g] + oi;
+  const idx = charIdx(g, i);
   const ch = DATA.chars[idx];
   const py = DATA.py[idx] || '';
   const gl = DATA.gl[idx] || '';
   // 题型：约 6 成读音，其余在有释义时考字义
   let type = (hash(ch) % 10) < 6 ? '音' : (gl ? '义' : '音');
-  let opts=[], ans=0;
+  let opts=[], ans=0, word=null;
   if(type==='音'){
-    const d = pickPy(idx, py);
-    opts = [py, d];
+    const m = (DATA.multi || {})[ch];
+    if(m && m.length){
+      const r0 = mulberry32(S.seed + g*311 + i*23);
+      const rare = m.filter(x => x[1] !== py);
+      const pool = rare.length ? rare : m;
+      const pick = pool[Math.floor(r0()*pool.length)];
+      word = pick[0];
+      const correct = pick[1];
+      const all = (DATA.pyAll[idx]||'').split('|').filter(x=>x && x!==correct);
+      const d = all.length ? all[Math.floor(r0()*all.length)] : pickPy(idx, correct);
+      opts = [correct, d];
+    }else{
+      const d = pickPy(idx, py);
+      opts = [py, d];
+    }
   }else{
     const d = pickGl(idx, gl);
     opts = [gl, d];
   }
   const rnd = mulberry32(S.seed + g*131 + i*17);
   if(rnd() < .5) { opts = [opts[1],opts[0]]; ans = 1; }
-  return {g, i, idx, ch, type, opts, ans, py, gl};
+  return {g, i, idx, ch, type, opts, ans, py, gl, word};
 }
 function hash(s){ let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; return h; }
 
@@ -520,13 +628,21 @@ function render(){
   cur = makeCard(g);
   locked = false;
   const n = S.res[g].length;
-  $('#cardLv').textContent = GNAME[g] + ' · 第 ' + (Math.floor(n/100)+1) + ' 关';
+  $('#cardLv').textContent = (POOL.cram ? '急救 · ' + (catOf(cur.idx)||'易错') + ' · 第 ' : GNAME[g] + ' · 第 ') + (Math.floor(n/100)+1) + ' 关';
   const poly = (DATA.pyAll[cur.idx]||'').includes('|');
   $('#tag').textContent = cur.type==='音' ? (poly?'多音字':'读音') : '释义';
   $('#tag').className = 'tag' + (cur.type==='音' && poly ? ' multi' : '');
-  $('#hz').textContent = cur.ch;
-  $('#hz').classList.remove('pop'); void $('#hz').offsetWidth; $('#hz').classList.add('pop');
-  $('#q').innerHTML = cur.type==='音' ? '这个字读什么？' : '这个字是什么意思？';
+  if(cur.word){
+    $('#hz').innerHTML = cur.word.replace(cur.ch, '<em>'+cur.ch+'</em>');
+    $('#hz').className = 'hz w'+Math.min(4, cur.word.length);
+  }else{
+    $('#hz').textContent = cur.ch;
+    $('#hz').className = 'hz';
+  }
+  void $('#hz').offsetWidth; $('#hz').classList.add('pop');
+  $('#q').innerHTML = cur.type==='音'
+    ? (cur.word ? '标红的字读什么？' : '这个字读什么？')
+    : '这个字是什么意思？';
   $('#reveal').className = 'reveal'; $('#reveal').innerHTML='';
   if(S.mode!=='quiz'){
     $('#reveal').innerHTML = '<div class="more" style="opacity:.75">空格 看答案 · 想好后再判断</div>';
@@ -553,26 +669,38 @@ function updateHud(){
     $('#ticks').innerHTML = Array.from({length:segs},()=>'<span></span>').join('');
   }
   // levels
-  [...$('#levels').children].forEach((el,i)=>{
+  const lvBox = $('#levels');
+  if(lvBox.children.length !== NG){
+    lvBox.innerHTML = GNAME.map(x=>'<span class="lv"></span>').join('');
+  }
+  [...lvBox.children].forEach((el,i)=>{
+    el.textContent = GNAME[i];
     el.className = 'lv' + (i===g?' on':'') + (S.res[i].length>=GTARGET[i]?' done':'');
   });
   // 掌握率
-  let k=0,t=0; for(let i=0;i<3;i++){ for(const c of S.res[i]){ t++; if(c==='1')k++; } }
+  let k=0,t=0; for(let i=0;i<NG;i++){ for(const c of S.res[i]){ t++; if(c==='1')k++; } }
   $('#rate').innerHTML = t? Math.round(k/t*100)+'<small>%</small>' : '—';
   // 配速
   const done = totalDone();
   if(done>2 && S.elapsed>2){
     const spd = done/S.elapsed;                    // 字/秒
-    const remain = (4000+500) - (S.res[0].length+S.res[1].length);
-    if(remain>0){
-      const need = remain/spd;
-      const left = TARGET_SEC - S.elapsed;
-      $('#pace').innerHTML = '预计还需 <b>'+fmt(need)+'</b> · 建议余 '+fmt(left);
+    if(POOL.cram){
+      const remain = GTARGET[0] - S.res[0].length;
+      $('#pace').innerHTML = remain>0
+        ? '预计还需 <b>'+fmt(remain/spd)+'</b> · 均速 '+(spd*60).toFixed(0)+' 字/分'
+        : '本组已完成 · 均速 '+(spd*60).toFixed(0)+' 字/分';
     }else{
-      $('#pace').innerHTML = '甲+乙 已完成 · 均速 '+ (spd*60).toFixed(0) +' 字/分';
+      const remain = (4000+500) - (S.res[0].length+S.res[1].length);
+      if(remain>0){
+        const need = remain/spd;
+        const left = TARGET_SEC - S.elapsed;
+        $('#pace').innerHTML = '预计还需 <b>'+fmt(need)+'</b> · 建议余 '+fmt(left);
+      }else{
+        $('#pace').innerHTML = '甲+乙 已完成 · 均速 '+ (spd*60).toFixed(0) +' 字/分';
+      }
     }
   }else{
-    $('#pace').textContent = '建议 4 小时内过完甲+乙';
+    $('#pace').textContent = POOL.cram ? '考前急救 · 1000 易错字' : '建议 4 小时内过完甲+乙';
   }
   $('#clock').textContent = fmt(S.elapsed);
 }
@@ -621,10 +749,11 @@ function record(kind){
 function showReveal(kind){
   const r = $('#reveal');
   const parts = [];
-  parts.push('<div class="py">'+cur.py+'</div>');
-  if(cur.gl) parts.push('<div class="gl">'+cur.gl+'</div>');
-  const all = (DATA.pyAll[cur.idx]||'').split('|').filter(x=>x&&x!==cur.py);
-  if(all.length) parts.push('<div class="more">多音字：'+all.slice(0,4).join('、')+'</div>');
+  const correct = (cur.type==='音' && cur.opts && cur.opts.length) ? cur.opts[cur.ans] : cur.py;
+  parts.push('<div class="py">'+correct+'</div>');
+  if(cur.gl && !cur.word) parts.push('<div class="gl">'+cur.gl+'</div>');
+  const all = (DATA.pyAll[cur.idx]||'').split('|').filter(x=>x&&x!==correct);
+  if(all.length) parts.push('<div class="more">其它读音：'+all.slice(0,4).join('、')+'</div>');
   r.innerHTML = parts.join('');
   r.className = 'reveal on';
   if(S.mode==='quiz'){
@@ -645,7 +774,7 @@ function checkpoint(g, n){
     if(c==='0') unknownChars.push(ch);
     else if(c==='2') recogChars.push(ch);
   }
-  const blockSec = S.elapsed - blockStart;
+  const blockSec = Math.max(0, S.elapsed - blockStart);
   blockStart = S.elapsed;
   S.blocks.push({g, n, k, rc, u:100-k-rc, sec:blockSec});
   save();
@@ -653,9 +782,9 @@ function checkpoint(g, n){
   const totalK = countKnown();
   const done = totalDone();
   const rate = Math.round(totalK/done*100);
-  const remain12 = Math.max(0, 4500 - (S.res[0].length+S.res[1].length));
+  const remain12 = POOL.cram ? 0 : Math.max(0, 4500 - (S.res[0].length+S.res[1].length));
   const spd = done/Math.max(1,S.elapsed);
-  const eta = remain12/spd;
+  const eta = POOL.cram ? (GTARGET[0]-n)/spd : remain12/spd;
 
   openModal(`
     <div class="m-title">${GNAME[g]} · 第 ${n/100} 关 通过</div>
@@ -668,20 +797,22 @@ function checkpoint(g, n){
     </div>
     <div class="row"><span>本关节奏</span><b>${(blockSec/100).toFixed(1)} 秒/字</b></div>
     <div class="row"><span>已用时间</span><b>${fmt(S.elapsed)}</b></div>
-    <div class="row"><span>甲+乙 剩余</span><b>${remain12} 字</b></div>
-    <div class="row"><span>按当前速度预计还需</span><b>${remain12? fmt(eta) : '已完成'}</b></div>
+    ${POOL.cram
+      ? `<div class="row"><span>本组剩余</span><b>${GTARGET[0]-n} 字</b></div>`
+      : `<div class="row"><span>甲+乙 剩余</span><b>${remain12} 字</b></div>`}
+    <div class="row"><span>按当前速度预计还需</span><b>${(POOL.cram? (GTARGET[0]-n)>0 : remain12>0)? fmt(eta) : '已完成'}</b></div>
     ${unknownChars.length? `<div style="margin-top:16px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">本关不熟字（${unknownChars.length}）</div><div class="chips">${unknownChars.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`:''}
     ${recogChars.length? `<div style="margin-top:16px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">本关会认不会写（${recogChars.length}）</div><div class="chips">${recogChars.map(c=>`<span class="chip gold">${c}</span>`).join('')}</div>`:''}
     <div class="m-actions"><button class="btn primary" id="btnGo">继续 <span style="opacity:.6;font-size:12px">Enter</span></button></div>
   `, ()=>{ $('#btnGo').onclick = ()=>{ closeModal(); render(); }; });
 }
 
-function countKnown(){ let k=0; for(let i=0;i<3;i++) for(const c of S.res[i]) if(c==='1') k++; return k; }
+function countKnown(){ let k=0; for(let i=0;i<NG;i++) for(const c of S.res[i]) if(c==='1') k++; return k; }
 
 /* ---------------- 关卡完成 ---------------- */
 function levelClear(g){
   save();
-  if(g<2){
+  if(g<NG-1){
     const n = S.res[g].length;
     let k=0, rc=0; for(const c of S.res[g]){ if(c==='1') k++; else if(c==='2') rc++; }
     const sec = S.elapsed;
@@ -706,7 +837,7 @@ function levelClear(g){
 /* ---------------- 总报告 ---------------- */
 function showReport(){
   let k=0,rc=0,t=0; const rows=[];
-  for(let g=0;g<3;g++){
+  for(let g=0;g<NG;g++){
     const n=S.res[g].length; let kk=0, rr=0;
     for(const c of S.res[g]){ if(c==='1') kk++; else if(c==='2') rr++; }
     k+=kk; rc+=rr; t+=n;
@@ -716,7 +847,7 @@ function showReport(){
   const bad = allUnknown();
   const rcog = allRecog();
   openModal(`
-    <div class="m-title">全部通关</div>
+    <div class="m-title">${POOL.cram ? '急救测试完成' : '全部通关'}</div>
     <div class="m-sub">${t} 字 · 用时 ${fmt(S.elapsed)} · 平均 ${(S.elapsed/Math.max(1,t)).toFixed(1)} 秒/字</div>
     <div class="big-num"><b>${rate}<span style="font-size:26px">%</span></b><span>总掌握率（${k} / ${t}）· 会认不会写 ${rc}</span></div>
     ${rows.join('')}
@@ -734,7 +865,7 @@ function showReport(){
     $('#btnExport').onclick = exportTxt;
     $('#btnReview').onclick = ()=> startReview('0');
     $('#btnReview2').onclick = ()=> startReview('2');
-    $('#btnRestart').onclick = ()=>{ if(confirm('清空全部进度，重新开始？')){ localStorage.removeItem(KEY); location.reload(); } };
+    $('#btnRestart').onclick = ()=>{ if(confirm('清空本模式的全部进度，重新开始？')){ localStorage.removeItem(POOL.key); location.reload(); } };
   });
 }
 function allUnknown(){
@@ -745,20 +876,20 @@ function allRecog(){
 }
 function collect(code){
   const out=[];
-  for(let g=0;g<3;g++){
+  for(let g=0;g<NG;g++){
     for(let i=0;i<S.res[g].length;i++){
-      if(S.res[g][i]===code) out.push(DATA.chars[OFFSET[g]+ORDER[g][i]]);
+      if(S.res[g][i]===code) out.push(DATA.chars[charIdx(g,i)]);
     }
   }
   return out;
 }
 function exportTxt(){
-  const lines = ['汉字应用水平测试 · 生字表','生成时间：'+new Date().toLocaleString(),''];
+  const lines = [(POOL.cram?'考前急救 · 生字表':'汉字应用水平测试 · 生字表'),'生成时间：'+new Date().toLocaleString(),''];
   for(const [code, label] of [['0','不熟'],['2','会认不会写']]){
     lines.push('======== '+label+' ========');
-    for(let g=0;g<3;g++){
+    for(let g=0;g<NG;g++){
       const arr=[];
-      for(let i=0;i<S.res[g].length;i++) if(S.res[g][i]===code) arr.push(DATA.chars[OFFSET[g]+ORDER[g][i]]);
+      for(let i=0;i<S.res[g].length;i++) if(S.res[g][i]===code) arr.push(DATA.chars[charIdx(g,i)]);
       lines.push(`【${GNAME[g]}】${label} ${arr.length} 字`);
       lines.push(arr.join(' '));
       lines.push('');
@@ -778,7 +909,7 @@ function startReview(code){
   if(!list.length){ toast(code==='2'?'没有会认不会写的字':'没有不熟字'); return; }
   REVIEW = list.slice(0, 400);
   reviewLabel = code==='2' ? '复习 · 会认不会写' : '复习 · 不熟字';
-  closeModal(); startPlay(true);
+  closeModal(); startPlay(true, POOL.id);
 }
 let REVIEW = null;
 let reviewLabel = '复习 · 不熟字';
@@ -832,11 +963,11 @@ function peekPrev(){
   if(cur && cur.review){ toast('复习模式暂不支持'); return; }
   if($('#mask').classList.contains('on')) return;
   if(peekOpen){ closePeek(); return; }
-  const total = S.res[0].length + S.res[1].length + S.res[2].length;
+  const total = totalDone();
   if(!total){ toast('还没有上一题'); return; }
   const pos = recordPos(total-1);
   if(!pos) return;
-  const idx = OFFSET[pos.g] + ORDER[pos.g][pos.i];
+  const idx = charIdx(pos.g, pos.i);
   const ch = DATA.chars[idx], py = DATA.py[idx]||'', gl = DATA.gl[idx]||'';
   const code = S.res[pos.g][pos.i];
   const type = (hash(ch)%10) < 6 ? '音' : (gl ? '义' : '音');
@@ -844,9 +975,10 @@ function peekPrev(){
   $('#peekLv').textContent = GNAME[pos.g] + ' · 第 ' + (Math.floor(pos.i/100)+1) + ' 关';
   $('#peekHz').textContent = ch;
   $('#peekQ').textContent = type==='音' ? '当时问的是：读音' : '当时问的是：释义';
-  $('#peekA').innerHTML = '<span class="py">'+py+'</span>'
-    + (gl ? '<span>'+gl+'</span>' : '')
-    + (all.length ? '<span class="more">多音字：'+all.slice(0,4).join('、')+'</span>' : '');
+  const allR = (DATA.pyAll[idx]||'').split('|').filter(Boolean);
+  $('#peekA').innerHTML = allR.length > 1
+    ? '<span class="py">'+allR.join(' / ')+'</span><span class="more">多音字，按例词定音</span>'
+    : '<span class="py">'+py+'</span>' + (gl ? '<span>'+gl+'</span>' : '');
   const m = $('#peekMark');
   m.textContent = code==='1' ? '掌握' : (code==='2' ? '会认不会写' : '不熟');
   m.className = code==='1' ? 'k1' : (code==='2' ? 'k2' : 'k0');
@@ -869,7 +1001,7 @@ function closePeek(){
 let undoPtr = null;          // 连续按 U 时逐条往回走
 function recordPos(p){
   let acc = 0;
-  for(let g=0; g<3; g++){
+  for(let g=0; g<NG; g++){
     const n = S.res[g].length;
     if(p < acc+n) return {g, i: p-acc};
     acc += n;
@@ -880,13 +1012,13 @@ function markPrevWrong(){
   if(!S) return;
   closePeek();
   if(cur && cur.review){ toast('复习模式不能回退'); return; }
-  const total = S.res[0].length + S.res[1].length + S.res[2].length;
+  const total = totalDone();
   if(!total){ toast('还没有可回退的题'); return; }
   let p = (undoPtr===null) ? total-1 : Math.max(0, undoPtr-1);
   undoPtr = p;
   const pos = recordPos(p);
   if(!pos) return;
-  const ch = DATA.chars[OFFSET[pos.g] + ORDER[pos.g][pos.i]];
+  const ch = DATA.chars[charIdx(pos.g, pos.i)];
   if(S.res[pos.g][pos.i] === '1'){
     pushUndo('改判「'+ch+'」为不熟');
     S.res[pos.g] = S.res[pos.g].slice(0,pos.i) + '0' + S.res[pos.g].slice(pos.i+1);
@@ -907,8 +1039,12 @@ function answer(choice){
 }
 
 /* ---------------- 开始 ---------------- */
-function startPlay(review){
-  if(!S) S = newState();
+function startPlay(review, poolId){
+  POOL = POOLS[poolId || 'main'];
+  NG = POOL.targets.length;
+  GNAME = POOL.names;
+  GTARGET = POOL.targets;
+  if(!S || S.pool !== POOL.id) S = newState();
   S.started = true;
   buildOrder();
   $('#home').classList.add('hide');
@@ -936,7 +1072,8 @@ function renderReview(){
   $('#cardLv').textContent = reviewLabel;
   $('#tag').textContent = '读音';
   $('#hz').textContent = ch;
-  $('#hz').classList.remove('pop'); void $('#hz').offsetWidth; $('#hz').classList.add('pop');
+  $('#hz').className = 'hz';
+  void $('#hz').offsetWidth; $('#hz').classList.add('pop');
   $('#q').innerHTML = '这个字读什么？';
   $('#reveal').className='reveal'; $('#reveal').innerHTML='';
   $('#opts').classList.add('hide');
@@ -945,21 +1082,20 @@ function renderReview(){
 
 /* ---------------- 事件绑定 ---------------- */
 function bind(){
-  $('#btnStart').onclick = ()=>{
-    const old = load();
-    if(old && (old.res[0].length+old.res[1].length+old.res[2].length)>0){
-      if(!confirm('已有进度 '+ (old.res[0].length+old.res[1].length+old.res[2].length) +' 字，开始新的通关会清空它。确定？')) return;
+  const enter = (pid)=>{
+    const s = loadFor(pid), p = POOLS[pid];
+    if(s && s.res.some(r=>r.length>0)){
+      s.pool = pid; S = s;
+    }else{
+      POOL = p; NG = p.targets.length; GNAME = p.names; GTARGET = p.targets;
+      S = newState();
     }
-    S = newState(); REVIEW=null; save(); startPlay();
-  };
-  $('#btnResume').onclick = ()=>{
-    const s = load();
-    if(!s){ toast('没有可继续的进度'); return; }
-    S = s; buildOrder();
+    REVIEW = null;
     document.documentElement.style.setProperty('--hzscale', [1,1.16,1.34][S.font||0]);
-    $('#home').classList.add('hide'); $('#play').classList.remove('hide');
-    blockStart = S.elapsed; render(); startTimer();
+    startPlay(false, pid);
   };
+  $('#btnStart').onclick = ()=> enter('main');
+  $('#btnCram').onclick = ()=> enter('cram');
   $('#btnSettings').onclick = ()=>{ if(!S) S=newState(); openSettings(true); };
   $('#btnTheme').onclick = toggleTheme;
   $('#btnYes').onclick = ()=> record('known');
@@ -1053,11 +1189,11 @@ function openSettings(fromHome){
 function statsModal(){
   const g = curGroup();
   let k=0,rc=0,t=0;
-  for(let i=0;i<3;i++){ for(const c of S.res[i]){ t++; if(c==='1')k++; else if(c==='2')rc++; } }
+  for(let i=0;i<NG;i++){ for(const c of S.res[i]){ t++; if(c==='1')k++; else if(c==='2')rc++; } }
   const done = totalDone();
-  const remain12 = Math.max(0, 4500 - (S.res[0].length+S.res[1].length));
+  const remain12 = POOL.cram ? 0 : Math.max(0, 4500 - (S.res[0].length+S.res[1].length));
   const spd = done/Math.max(1,S.elapsed);
-  const rows = [0,1,2].map(i=>{
+  const rows = GNAME.map((_,i)=>{
     const n=S.res[i].length; let kk=0, rr=0;
     for(const c of S.res[i]){ if(c==='1') kk++; else if(c==='2') rr++; }
     return `<div class="row"><span>${GNAME[i]}</span><b>${kk} 掌握 · ${rr} 会认 · ${n-kk-rr} 不熟</b></div>`;
@@ -1069,8 +1205,8 @@ function statsModal(){
     <div class="m-sub">${done} 字 · 用时 ${fmt(S.elapsed)}</div>
     <div class="big-num"><b>${t?Math.round(k/t*100):0}<span style="font-size:26px">%</span></b><span>掌握率（${k} / ${t}）· 会认不会写 ${rc}</span></div>
     ${rows}
-    <div class="row"><span>甲+乙 剩余</span><b>${remain12} 字</b></div>
-    <div class="row"><span>预计还需</span><b>${remain12&&spd? fmt(remain12/spd):'—'}</b></div>
+    <div class="row"><span>${POOL.cram?'本组剩余':'甲+乙 剩余'}</span><b>${POOL.cram? (GTARGET[0]-S.res[0].length) : remain12} 字</b></div>
+    <div class="row"><span>预计还需</span><b>${(POOL.cram? GTARGET[0]-S.res[0].length : remain12)&&spd? fmt((POOL.cram? GTARGET[0]-S.res[0].length : remain12)/spd):'—'}</b></div>
     <div class="row"><span>均速</span><b>${(spd*60).toFixed(0)} 字/分</b></div>
     ${rcog.length? `<div style="margin-top:16px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">会认不会写（${rcog.length}）</div><div class="chips" style="max-height:110px">${rcog.map(c=>`<span class="chip gold">${c}</span>`).join('')}</div>`:''}
     ${bad.length? `<div style="margin-top:16px;font-size:12px;color:var(--ink-3);letter-spacing:.08em">不熟字（${bad.length}）</div><div class="chips" style="max-height:160px">${bad.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`:''}
@@ -1080,19 +1216,30 @@ function statsModal(){
 
 /* ---------------- 首页渲染 ---------------- */
 function renderHome(){
-  const s = load();
+  const sm = loadFor('main'), sc = loadFor('cram');
+  const nMain = sm ? sm.res.reduce((a,r)=>a+r.length,0) : 0;
+  const nCram = sc ? sc.res[0].length : 0;
   const cards = [0,1,2].map(g=>{
-    const n = s? s.res[g].length : 0;
-    const pct = n/GTARGET[g]*100;
+    const n = sm? sm.res[g].length : 0;
+    const pct = n/4000*100;
+    const tgt = [4000,500,1000][g];
     return `<div class="lvc">
-      <div class="n">${GNAME[g]}</div>
-      <div class="c">${GTARGET[g]}<span style="font-size:13px;font-weight:400;color:var(--ink-3)"> 字</span></div>
-      <div class="d">${n? '已过 '+n+' 字 · '+Math.round(pct)+'%' : '未开始'}</div>
-      <div class="bar"><i style="width:${pct}%"></i></div>
+      <div class="n">${['甲组','乙组','丙组'][g]}</div>
+      <div class="c">${tgt}<span style="font-size:13px;font-weight:400;color:var(--ink-3)"> 字</span></div>
+      <div class="d">${n? '已过 '+n+' 字 · '+Math.round(n/tgt*100)+'%' : '未开始'}</div>
+      <div class="bar"><i style="width:${n/tgt*100}%"></i></div>
     </div>`;
   }).join('');
-  $('#lvCards').innerHTML = cards;
-  $('#btnResume').style.display = s && (s.res[0].length||s.res[1].length||s.res[2].length) ? '' : 'none';
+  const cramCard = `<div class="lvc cram">
+      <div class="n">考前急救</div>
+      <div class="c">1000<span style="font-size:13px;font-weight:400;color:var(--ink-3)"> 易错字</span></div>
+      <div class="d">${nCram? '已过 '+nCram+' 字 · '+Math.round(nCram/10)+'%' : '形近 · 多音 · 生僻'}</div>
+      <div class="bar"><i style="width:${nCram/10}%"></i></div>
+    </div>`;
+  $('#lvCards').innerHTML = cards + cramCard;
+  const b1 = $('#btnStart'), b2 = $('#btnCram');
+  b1.textContent = nMain ? '继续通关（'+nMain+' 字）' : '开始通关';
+  b2.textContent = nCram ? '继续急救（'+nCram+' 字）' : '考前急救 · 1000 易错字';
 }
 renderHome();
 applyTheme();

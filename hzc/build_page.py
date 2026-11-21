@@ -53,12 +53,19 @@ for c in all_chars:
     py.append(rs[0] if rs else '')
     py_all.append('|'.join(rs[:5]) if len(rs) > 1 else '')
 
+try:
+    multi = json.load(open('multi.json', encoding='utf-8'))
+except Exception:
+    multi = {}
+
 data = {
     'chars': all_chars,
     'py': py,
     'pyAll': py_all,
     'gl': gl,
     'sizes': [4000, 500, 1000],
+    'emerg': json.load(open('emergency.json', encoding='utf-8')),
+    'multi': multi,
 }
 
 print('chars', len(all_chars), 'gloss-ok', sum(1 for x in gl if x), 'poly', sum(1 for x in py_all if x))

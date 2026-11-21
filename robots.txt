@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://entiesci.github.io/OnlineTest/sitemap.xml
