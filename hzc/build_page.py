@@ -75,5 +75,5 @@ payload = json.dumps(data, ensure_ascii=False, separators=(',', ':'))
 marker = 'const DATA = /*__DATA__*/{chars:"",py:[],pyAll:[],gl:[],sizes:[0,0,0]};'
 assert marker in tpl, 'marker not found'
 out = tpl.replace(marker, 'const DATA = ' + payload + ';')
-open('汉字通关.html', 'w', encoding='utf-8').write(out)
+open('game.html', 'w', encoding='utf-8').write(out)
 print('written', len(out))

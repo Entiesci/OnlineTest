@@ -3,31 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>汉字应用水平测试 5500字在线测试 · 易错字 / 多音字通关</title>
-<meta name="description" content="依据《汉字应用水平等级及测试大纲》附录A字表的在线测试：甲表4000、乙表500、丙表1000 逐字测试，另设考前急救1000个易错字。">
+<title>在线测试 · 汉字应用水平测试 5500 字通关</title>
+<meta name="description" content="在线测试合集：汉字应用水平测试 5500 字通关（甲表4000 / 乙表500 / 丙表1000，附考前急救1000易错字）。无需注册，进度保存在本地。">
+<meta name="keywords" content="在线测试,汉字应用水平测试,5500字,易错字,多音字,HZC">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://entiesci.github.io/OnlineTest/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="在线测试 · 汉字应用水平测试 5500 字通关">
+<meta property="og:description" content="汉字应用水平测试 5500 字逐字测试，附考前急救 1000 易错字。">
+<meta property="og:url" content="https://entiesci.github.io/OnlineTest/">
 <style>
-body{margin:0;background:#f6f1e7;color:#211c16;font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-     display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px}
-.wrap{max-width:620px;text-align:center}
-.seal{width:56px;height:56px;border-radius:12px;background:#b3402f;color:#fff;display:grid;place-items:center;
-      font-family:"KaiTi",serif;font-size:26px;margin:0 auto 18px}
-h1{font-size:26px;margin:0 0 12px;letter-spacing:.03em}
-p{color:#6b6255;font-size:14px;line-height:1.9;margin:0 0 26px}
-a.go{display:inline-block;background:#211c16;color:#fff;text-decoration:none;padding:14px 34px;border-radius:12px;font-size:15px;letter-spacing:.06em}
-a.go:hover{background:#000}
-small{display:block;margin-top:18px;color:#9a9082;font-size:12px}
+:root{--bg:#f6f1e7;--card:#fffdf8;--ink:#211c16;--ink2:#6b6255;--ink3:#9a9082;--line:#e4dbc9;--red:#b3402f;--gold:#b08a3e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+     min-height:100vh;padding:64px 22px 80px}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(1100px 560px at 12% -12%,rgba(201,163,94,.14) 0%,rgba(201,163,94,0) 62%),
+             radial-gradient(900px 520px at 100% 112%,rgba(179,64,47,.07) 0%,rgba(179,64,47,0) 60%)}
+.wrap{position:relative;z-index:1;max-width:900px;margin:0 auto}
+.head{text-align:center;margin-bottom:44px}
+.seal{width:52px;height:52px;border-radius:12px;background:var(--red);color:#fff5ef;display:grid;place-items:center;
+      font-family:"KaiTi","Kaiti SC",serif;font-size:24px;margin:0 auto 16px;box-shadow:0 10px 24px -10px rgba(179,64,47,.75)}
+h1{font-size:clamp(24px,3.2vw,34px);margin:0 0 10px;letter-spacing:.04em;font-weight:600}
+.lead{color:var(--ink2);font-size:14px;line-height:1.9;margin:0 auto;max-width:560px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.t{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);border-radius:18px;
+   padding:22px 24px;transition:.18s;box-shadow:0 14px 34px -20px rgba(60,45,25,.35)}
+.t:hover{transform:translateY(-2px);box-shadow:0 20px 40px -20px rgba(60,45,25,.45);border-color:#cdbf9f}
+.t .k{font-size:11px;letter-spacing:.18em;color:var(--ink3);margin-bottom:8px}
+.t h2{font-size:19px;margin:0 0 8px;font-weight:600;letter-spacing:.02em}
+.t p{margin:0 0 14px;color:var(--ink2);font-size:13.5px;line-height:1.8}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{font-size:11.5px;color:var(--gold);border:1px solid #e3d3ab;background:#fbf6e8;border-radius:999px;padding:2px 10px}
+.tag.g{color:#3d6b4f;border-color:#c7d6c9;background:#e9f0ea}
+.more{display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);border-radius:18px;
+      color:var(--ink3);font-size:13px;min-height:150px}
+.t.friend{background:linear-gradient(180deg,#fdfaf2,#fbf6e8);border-color:#e3d3ab}
+.t.friend:hover{border-color:#c9b487}
+.t.friend h2{font-size:18px}
+.tag.f{color:#8a5a2b;border-color:#e6cdae;background:#fbf1e4}
+footer{margin-top:44px;text-align:center;color:var(--ink3);font-size:12px;line-height:2}
+footer a{color:var(--ink2)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="seal">字</div>
-  <h1>汉字应用水平测试 · 5500 字在线测试</h1>
-  <p>按《汉字应用水平等级及测试大纲》附录 A 字表，逐字测试甲表 4000 字、乙表 500 字、丙表 1000 字的读音与释义；
-     另设「考前急救」1000 个易错字（形近易混、多音易读、生僻易忘）。每字一题，自动统计掌握率与不熟字。</p>
-  <a class="go" href="./hzc/">进入测试</a>
-  <small>无需注册 · 进度保存在本地浏览器</small>
+  <div class="head">
+    <div class="seal">测</div>
+    <h1>在线测试</h1>
+    <p class="lead">按考试大纲与权威字表整理的逐题自测工具。纯前端、无需注册，进度保存在本地浏览器。</p>
+  </div>
+
+  <div class="grid">
+    <a class="t" href="./hzc/">
+      <div class="k">语言 · 汉字</div>
+      <h2>汉字应用水平测试 · 5500 字通关</h2>
+      <p>依据《汉字应用水平等级及测试大纲》附录 A 字表，甲表 4000 → 乙表 500 → 丙表 1000 逐字测试；多音字按例词考读音，另设考前急救 1000 个易错字。</p>
+      <div class="tags">
+        <span class="tag">5500 字</span>
+        <span class="tag">1000 易错字</span>
+        <span class="tag g">多音字例词</span>
+      </div>
+    </a>
+
+    <a class="t friend" href="https://couldyyy9.github.io/cet-website/" target="_blank" rel="noopener">
+      <div class="k">友情链接 · 外部站点</div>
+      <h2>决战四六级</h2>
+      <p>四六级真题在线做题：四级、六级真题库，按年份分卷，配错题本，完全免费。</p>
+      <div class="tags">
+        <span class="tag f">友情链接</span>
+        <span class="tag">四六级真题</span>
+      </div>
+    </a>
+
+    <div class="more">更多测试陆续添加</div>
+  </div>
+
+  <footer>
+    数据来源：教育部、国家语委《汉字应用水平等级及测试大纲》附录 A 字表 · 拼音与释义数据来自公开字库<br>
+    <a href="./hzc/1000easywrong.html">1000 易错字表</a> · <a href="https://github.com/Entiesci/OnlineTest">GitHub 仓库</a>
+  </footer>
 </div>
 </body>
 </html>
